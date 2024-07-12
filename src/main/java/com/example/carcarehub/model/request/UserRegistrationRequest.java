@@ -1,15 +1,10 @@
-package com.example.carcarehub.domain;
+package com.example.carcarehub.model.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonTypeId;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 
-public class User {
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class UserRegistrationRequest {
+
     private String firstName;
     private String lastName;
     private String nic;
@@ -17,14 +12,6 @@ public class User {
     private String password;
     private String confirmPassword;
     private String email;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getFirstName() {
         return firstName;

@@ -1,30 +1,16 @@
-package com.example.carcarehub.domain;
+package com.example.carcarehub.model.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonTypeId;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import org.springframework.stereotype.Repository;
 
-public class User {
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class UserRegistrationResponse {
+
     private String firstName;
     private String lastName;
     private String nic;
     private String mobileNumber;
-    private String password;
-    private String confirmPassword;
     private String email;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -56,22 +42,6 @@ public class User {
 
     public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
     }
 
     public String getEmail() {
