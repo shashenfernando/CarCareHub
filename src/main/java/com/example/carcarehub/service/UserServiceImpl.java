@@ -2,15 +2,14 @@ package com.example.carcarehub.service;
 
 import com.example.carcarehub.domain.User;
 import com.example.carcarehub.exception.CarCareHubException;
+import com.example.carcarehub.model.request.UserLoginRequest;
 import com.example.carcarehub.model.request.UserRegistrationRequest;
 import com.example.carcarehub.model.request.UserUpdateRequest;
-import com.example.carcarehub.model.response.CarCareAllUserResponse;
-import com.example.carcarehub.model.response.FindUserResponse;
-import com.example.carcarehub.model.response.UserRegistrationResponse;
-import com.example.carcarehub.model.response.UserUpdateResponse;
+import com.example.carcarehub.model.response.*;
 import com.example.carcarehub.repository.UserRepository;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -147,5 +146,25 @@ public class UserServiceImpl implements UserService{
           throw new Exception(CarCareHubException.INVALID_USER);
       }
       userRepository.deleteUserById(userId);
+    }
+
+    @Override
+    public UserLoginResponse loginUser(UserLoginRequest userLoginRequest) throws Exception {
+        User user = userRepository.findUserByEmail(userLoginRequest.getEmail());
+
+        if (user == null){
+            throw new Exception(CarCareHubException.INVALID_USER);
+        }
+
+    if (!userLoginRequest.getEmail().equalsIgnoreCase(user.getPassword())){
+        throw new Exception(CarCareHubException.INVALID_PASSWORD);
+    }
+
+    UserLoginResponse response = new UserLoginResponse();
+    response.setEmail(user.getEmail());
+    response.setPassword(user.getPassword());
+
+    return response;
+
     }
 }

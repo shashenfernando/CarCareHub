@@ -11,6 +11,7 @@ public class CarCareHubException extends RuntimeException{
     public static final String THIS_EMAIL_ALREADY_EXIST = "06";
     public static final String NO_USERS_DATA_FOUND ="07";
     public static final String INVALID_USER = "08";
+    public static final String INVALID_PASSWORD = "09";
 
 
 }
