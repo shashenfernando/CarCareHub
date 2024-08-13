@@ -2,10 +2,9 @@ package com.example.carcarehub.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonTypeId;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+@Entity
 public class User {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
