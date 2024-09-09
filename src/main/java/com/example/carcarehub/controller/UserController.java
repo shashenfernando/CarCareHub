@@ -17,7 +17,7 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(method = RequestMethod.POST , value ="/createUser")
-    public CarCareHubResponse createNewUser(UserRegistrationRequest userRegistrationRequest) throws Exception{
+    public CarCareHubResponse createNewUser(@RequestBody UserRegistrationRequest userRegistrationRequest) throws Exception{
 
         UserRegistrationResponse response = userService.createUser(userRegistrationRequest);
         CarCareHubResponse careHubResponse = new CarCareHubResponse();

@@ -92,6 +92,7 @@ public class UserServiceImpl implements UserService{
             userResponse.setNic(user.getNic());
             userResponse.setMobileNumber(user.getMobileNumber());
             userResponse.setEmail(user.getEmail());
+            userResponses.add(userResponse);
         }
          return userResponses;
     }
