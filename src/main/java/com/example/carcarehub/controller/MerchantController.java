@@ -1,16 +1,12 @@
 package com.example.carcarehub.controller;
 
-import com.example.carcarehub.model.request.MerchantRegistrationRequest;
-import com.example.carcarehub.model.request.UserRegistrationRequest;
-import com.example.carcarehub.model.response.CarCareHubResponse;
-import com.example.carcarehub.model.response.MerchantRegistrationResponse;
-import com.example.carcarehub.model.response.UserRegistrationResponse;
+import com.example.carcarehub.model.request.*;
+import com.example.carcarehub.model.response.*;
 import com.example.carcarehub.service.MerchantService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class MerchantController {
@@ -28,6 +24,21 @@ public class MerchantController {
         careHubResponse.setResponseObject(response);
 
         return careHubResponse;
+    }
+
+    @RequestMapping(method = RequestMethod.GET , value = "/allMerchants")
+    public List<AllMerchantResponse> getAllMerchants() throws Exception{
+        return merchantService.getAllMerchants();
+    }
+    @RequestMapping(method = RequestMethod.PUT , value = "/{userId}/updateCarCareMerchant")
+    public UpdateMerchantResponse updateMerchant(@PathVariable("userId")int userId , @RequestBody UpdateMerchantRequest updateMerchantRequest) throws Exception{
+
+        UpdateMerchantResponse response = merchantService.updateMerchantDetails(userId,updateMerchantRequest);
+        CarCareHubResponse careHubResponse = new CarCareHubResponse();
+        careHubResponse.setResponseCode("00");
+        careHubResponse.setResponseObject(response);
+
+        return response;
     }
 
 }
