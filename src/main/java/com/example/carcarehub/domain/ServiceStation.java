@@ -16,6 +16,8 @@ public class ServiceStation {
     private String zipCode;
     private String province;
     private String country;
+    private String district;
+    private String division;
     private String road;
     private String email;
     private String password;
@@ -77,6 +79,22 @@ public class ServiceStation {
         this.country = country;
     }
 
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getDivision() {
+        return division;
+    }
+
+    public void setDivision(String division) {
+        this.division = division;
+    }
+
     public String getRoad() {
         return road;
     }
@@ -108,4 +126,5 @@ public class ServiceStation {
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
     }
+
 }
