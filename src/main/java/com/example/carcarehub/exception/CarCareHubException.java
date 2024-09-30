@@ -12,6 +12,10 @@ public class CarCareHubException extends RuntimeException{
     public static final String NO_USERS_DATA_FOUND ="07";
     public static final String INVALID_USER = "08";
     public static final String INVALID_PASSWORD = "09";
+    public static final String MERCHANT_NOT_FOUND = "10";
+    public static final String ADMIN_NOT_FOUND = "11";
+    public static  final String MERCHANT_DATA_NOT_FOUND = "12";
+    public static final String ADMIN_DATA_NOT_FOUND ="13";
 
 
 }
