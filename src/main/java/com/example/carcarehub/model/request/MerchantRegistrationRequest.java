@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MerchantRegistrationRequest {
-    private int merchantId;
     private String firstName;
     private String lastName;
     private String userName;
@@ -14,13 +13,6 @@ public class MerchantRegistrationRequest {
     private String confirmPassword;
     private String mobileNumber;
 
-    public int getMerchantId() {
-        return merchantId;
-    }
-
-    public void setMerchantId(int merchantId) {
-        this.merchantId = merchantId;
-    }
 
     public String getFirstName() {
         return firstName;
