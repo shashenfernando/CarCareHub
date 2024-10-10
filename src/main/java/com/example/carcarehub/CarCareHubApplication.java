@@ -10,6 +10,9 @@ public class CarCareHubApplication {
         SpringApplication.run(CarCareHubApplication.class, args);
         System.out.println("Car Care Hub");
         System.out.println("Shashen");
+        System.out.println("Nimash");
+        System.out.println("Malindu");
+        System.out.println("Nipun");
     }
 
 }
