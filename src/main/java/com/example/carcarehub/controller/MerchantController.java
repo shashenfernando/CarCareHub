@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("api/v1/merchant/")
 public class MerchantController {
 
     @Autowired
@@ -30,6 +31,7 @@ public class MerchantController {
     public List<AllMerchantResponse> getAllMerchants() throws Exception{
         return merchantService.getAllMerchants();
     }
+
     @RequestMapping(method = RequestMethod.PUT , value = "/{userId}/updateCarCareMerchant")
     public UpdateMerchantResponse updateMerchant(@PathVariable("userId")int userId , @RequestBody UpdateMerchantRequest updateMerchantRequest) throws Exception{
 
@@ -39,6 +41,13 @@ public class MerchantController {
         careHubResponse.setResponseObject(response);
 
         return response;
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE , value = "/{merchantId}/deleteMerchant")
+    public void deleteMerchant(@PathVariable("merchantId")int merchantId)throws Exception{
+
+        CarCareHubResponse response = new CarCareHubResponse();
+        response.setResponseCode("00");
     }
 
 }
