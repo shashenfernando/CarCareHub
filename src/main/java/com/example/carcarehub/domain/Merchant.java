@@ -14,30 +14,24 @@ public class Merchant implements Serializable {
     @OneToOne
     @JoinColumn(name="merchant_credentials_id")
     private MerchantCredential merchantCredential;
-
-    @Column(name = "first_name", nullable = false, length = 255)
-    private String firstName;
-
-    @Column(name = "last_name", nullable = false, length = 255)
-    private String lastName;
-
     @Column(name = "station_name", nullable = false, length = 255)
     private String stationName;
-
+    @Column(name = "business_reg_no", nullable = false, length = 255)
+    private String businessRegNo;
     @Column(name = "email", nullable = false, length = 255)
-    private String email;
-
-    @Column(name = "nic", nullable = false, length = 255)
-    private String nic;
+    private String businessEmail;
 
     @Column(name = "mobile_number", nullable = false, length = 255)
-    private String mobileNumber;
+    private String businessMobileNumber;
 
     @Column(name = "register_date", nullable = false)
     private Date registeredDate;
 
-    @Column(name = "approved_by", nullable = false, length = 255)
+    @Column(name = "approved_by", length = 255)
     private String approvedBy;
+
+    @Column(name = "approved_date", length = 255)
+    private Date approvedDate;
 
     @Column(name = "zip_code", nullable = false, length = 255)
     private String zipCode;
@@ -48,23 +42,15 @@ public class Merchant implements Serializable {
     @Column(name = "latitude", nullable = false, length = 255)
     private String latitude;
 
-    @Column(name = "home_town", nullable = false, length = 255)
-    private String homeTown;
-
     @Column(name = "road", nullable = false, length = 255)
     private String road;
+
+    @Column(name = "home_town", nullable = false, length = 255)
+    private String homeTown;
 
     @Column(name = "status", nullable = false)
     private String status = "I";
 
-    @Column(name = "daily_count", nullable = false)
-    private int dailyCount = 1;
-
-    @Column(name = "open_time", nullable = false)
-    private String openTime;
-
-    @Column(name = "close_time", nullable = false)
-    private String closeTime;
 
     public int getId() {
         return id;
@@ -82,22 +68,6 @@ public class Merchant implements Serializable {
         this.merchantCredential = merchantCredential;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public String getStationName() {
         return stationName;
     }
@@ -106,28 +76,37 @@ public class Merchant implements Serializable {
         this.stationName = stationName;
     }
 
-    public String getEmail() {
-        return email;
+
+    public String getBusinessRegNo() {
+        return businessRegNo;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setBusinessRegNo(String businessRegNo) {
+        this.businessRegNo = businessRegNo;
     }
 
-    public String getNic() {
-        return nic;
+    public String getBusinessEmail() {
+        return businessEmail;
     }
 
-    public void setNic(String nic) {
-        this.nic = nic;
+    public void setBusinessEmail(String businessEmail) {
+        this.businessEmail = businessEmail;
     }
 
-    public String getMobileNumber() {
-        return mobileNumber;
+    public String getBusinessMobileNumber() {
+        return businessMobileNumber;
     }
 
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
+    public void setBusinessMobileNumber(String businessMobileNumber) {
+        this.businessMobileNumber = businessMobileNumber;
+    }
+
+    public Date getApprovedDate() {
+        return approvedDate;
+    }
+
+    public void setApprovedDate(Date approvedDate) {
+        this.approvedDate = approvedDate;
     }
 
     public Date getRegisteredDate() {
@@ -194,27 +173,5 @@ public class Merchant implements Serializable {
         this.status = status;
     }
 
-    public int getDailyCount() {
-        return dailyCount;
-    }
 
-    public void setDailyCount(int dailyCount) {
-        this.dailyCount = dailyCount;
-    }
-
-    public String getOpenTime() {
-        return openTime;
-    }
-
-    public void setOpenTime(String openTime) {
-        this.openTime = openTime;
-    }
-
-    public String getCloseTime() {
-        return closeTime;
-    }
-
-    public void setCloseTime(String closeTime) {
-        this.closeTime = closeTime;
-    }
 }
