@@ -2,6 +2,8 @@ package com.example.carcarehub.domain;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
 public class DayOfWeek {
 
@@ -9,6 +11,9 @@ public class DayOfWeek {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String day;
+
+    private String openTime;
+    private String closeTime;
     @OneToOne(mappedBy="dayOfWeek")
     private Count count;
 
