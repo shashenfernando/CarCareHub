@@ -29,8 +29,8 @@ public class UserServiceImpl implements UserService{
       user.setLastName(registrationRequest.getLastName());
       user.setNic(registrationRequest.getNic());
       user.setMobileNumber(registrationRequest.getMobileNumber());
-      user.setPassword(registrationRequest.getPassword());
-      user.setConfirmPassword(registrationRequest.getConfirmPassword());
+//      user.setPassword(registrationRequest.getPassword());
+//      user.setConfirmPassword(registrationRequest.getConfirmPassword());
       user.setEmail(registrationRequest.getEmail());
 
          if (!isUserValid(user)){
@@ -40,10 +40,10 @@ public class UserServiceImpl implements UserService{
          if (existingUser != null){
              throw new Exception(CarCareHubException.THIS_EMAIL_ALREADY_EXIST);
          }
-
-          String hashedPassword = hashedPassword(user.getPassword());
-         user.setPassword(hashedPassword);
-         user.setConfirmPassword(hashedPassword);
+//
+//          String hashedPassword = hashedPassword(user.getPassword());
+//         user.setPassword(hashedPassword);
+//         user.setConfirmPassword(hashedPassword);
 
         userRepository.save(user);
 
@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService{
 
     private boolean isUserValid(User user){
        return   user.getEmail() != null && user.getEmail().equalsIgnoreCase(user.getEmail()) &&
-                user.getPassword() != null && user.getPassword().equalsIgnoreCase(user.getConfirmPassword()) &&
+//                user.getPassword() != null && user.getPassword().equalsIgnoreCase(user.getConfirmPassword()) &&
                 user.getFirstName() != null && !user.getFirstName().isEmpty() &&
                 user.getLastName() != null && !user.getLastName().isEmpty() &&
                 user.getNic() != null && !user.getNic().isEmpty() &&
@@ -156,14 +156,14 @@ public class UserServiceImpl implements UserService{
         if (user == null){
             throw new Exception(CarCareHubException.INVALID_USER);
         }
-
-    if (!userLoginRequest.getEmail().equalsIgnoreCase(user.getPassword())){
-        throw new Exception(CarCareHubException.INVALID_PASSWORD);
-    }
+//
+//    if (!userLoginRequest.getEmail().equalsIgnoreCase(user.getPassword())){
+//        throw new Exception(CarCareHubException.INVALID_PASSWORD);
+//    }
 
     UserLoginResponse response = new UserLoginResponse();
     response.setEmail(user.getEmail());
-    response.setPassword(user.getPassword());
+//    response.setPassword(user.getPassword());
 
     return response;
 
