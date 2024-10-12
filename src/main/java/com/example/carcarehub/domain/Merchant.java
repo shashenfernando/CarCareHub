@@ -1,30 +1,85 @@
 package com.example.carcarehub.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.io.Serializable;
+import java.util.Date;
 
 @Entity
-public class Merchant {
+@Table(name = "merchant")
+public class Merchant implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int merchantId;
+    private int id;
+    @OneToOne
+    @JoinColumn(name="merchant_credentials_id")
+    private MerchantCredential merchantCredential;
+
+    @Column(name = "first_name", nullable = false, length = 255)
     private String firstName;
+
+    @Column(name = "last_name", nullable = false, length = 255)
     private String lastName;
-    private String userName;
+
+    @Column(name = "station_name", nullable = false, length = 255)
+    private String stationName;
+
+    @Column(name = "email", nullable = false, length = 255)
     private String email;
+
+    @Column(name = "nic", nullable = false, length = 255)
     private String nic;
-    private String password;
-    private String confirmPassword;
+
+    @Column(name = "mobile_number", nullable = false, length = 255)
     private String mobileNumber;
 
-    public int getMerchantId() {
-        return merchantId;
+    @Column(name = "register_date", nullable = false)
+    private Date registeredDate;
+
+    @Column(name = "approved_by", nullable = false, length = 255)
+    private String approvedBy;
+
+    @Column(name = "zip_code", nullable = false, length = 255)
+    private String zipCode;
+
+    @Column(name = "longitude", nullable = false, length = 255)
+    private String longitude;
+
+    @Column(name = "latitude", nullable = false, length = 255)
+    private String latitude;
+
+    @Column(name = "home_town", nullable = false, length = 255)
+    private String homeTown;
+
+    @Column(name = "road", nullable = false, length = 255)
+    private String road;
+
+    @Column(name = "status", nullable = false)
+    private String status = "I";
+
+    @Column(name = "daily_count", nullable = false)
+    private int dailyCount = 1;
+
+    @Column(name = "open_time", nullable = false)
+    private String openTime;
+
+    @Column(name = "close_time", nullable = false)
+    private String closeTime;
+
+    public int getId() {
+        return id;
     }
 
-    public void setMerchantId(int merchantId) {
-        this.merchantId = merchantId;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public MerchantCredential getMerchantCredential() {
+        return merchantCredential;
+    }
+
+    public void setMerchantCredential(MerchantCredential merchantCredential) {
+        this.merchantCredential = merchantCredential;
     }
 
     public String getFirstName() {
@@ -43,12 +98,12 @@ public class Merchant {
         this.lastName = lastName;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getStationName() {
+        return stationName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setStationName(String stationName) {
+        this.stationName = stationName;
     }
 
     public String getEmail() {
@@ -67,27 +122,99 @@ public class Merchant {
         this.nic = nic;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
-
     public String getMobileNumber() {
         return mobileNumber;
     }
 
     public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
+    }
+
+    public Date getRegisteredDate() {
+        return registeredDate;
+    }
+
+    public void setRegisteredDate(Date registeredDate) {
+        this.registeredDate = registeredDate;
+    }
+
+    public String getApprovedBy() {
+        return approvedBy;
+    }
+
+    public void setApprovedBy(String approvedBy) {
+        this.approvedBy = approvedBy;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getHomeTown() {
+        return homeTown;
+    }
+
+    public void setHomeTown(String homeTown) {
+        this.homeTown = homeTown;
+    }
+
+    public String getRoad() {
+        return road;
+    }
+
+    public void setRoad(String road) {
+        this.road = road;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public int getDailyCount() {
+        return dailyCount;
+    }
+
+    public void setDailyCount(int dailyCount) {
+        this.dailyCount = dailyCount;
+    }
+
+    public String getOpenTime() {
+        return openTime;
+    }
+
+    public void setOpenTime(String openTime) {
+        this.openTime = openTime;
+    }
+
+    public String getCloseTime() {
+        return closeTime;
+    }
+
+    public void setCloseTime(String closeTime) {
+        this.closeTime = closeTime;
     }
 }

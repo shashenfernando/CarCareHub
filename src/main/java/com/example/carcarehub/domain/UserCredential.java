@@ -27,6 +27,9 @@ public class UserCredential implements Serializable {
     @Column(name = "retry_count", nullable = false)
     private Integer retryCount = 0;  // Default value 0
 
+    @OneToOne(mappedBy="userCredential")
+    private User user;
+
     public UserCredential() {
 
     }
@@ -69,6 +72,13 @@ public class UserCredential implements Serializable {
 
     public void setRetryCount(Integer retryCount) {
         this.retryCount = retryCount;
+    }
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public UserCredential(Integer id, String userName, String password, String status, Integer retryCount) {

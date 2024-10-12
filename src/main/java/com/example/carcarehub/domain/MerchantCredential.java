@@ -27,6 +27,9 @@ public class MerchantCredential implements Serializable {
     @Column(name = "retry_count", nullable = false)
     private Integer retryCount = 0;  // Default value 0
 
+    @OneToOne(mappedBy="merchantCredential")
+    private Merchant merchant;
+
     public MerchantCredential() {
 
     }
@@ -69,6 +72,14 @@ public class MerchantCredential implements Serializable {
 
     public void setRetryCount(Integer retryCount) {
         this.retryCount = retryCount;
+    }
+
+    public Merchant getMerchant() {
+        return merchant;
+    }
+
+    public void setMerchant(Merchant merchant) {
+        this.merchant = merchant;
     }
 
     public MerchantCredential(Integer id, String stationName, String password, String status, Integer retryCount) {
