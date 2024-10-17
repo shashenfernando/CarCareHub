@@ -12,11 +12,10 @@ public class MerchantCredential implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Integer id;
 
-    @Column(name = "station_name", nullable = false, length = 255)
-    private String stationName;
+    @Column(name = "user_name", nullable = false, length = 255)
+    private String user_name;
 
     @Column(name = "password", nullable = false, length = 255)
     private String password;
@@ -27,11 +26,11 @@ public class MerchantCredential implements Serializable {
     @Column(name = "retry_count", nullable = false)
     private Integer retryCount = 0;  // Default value 0
 
-    @OneToOne(mappedBy="merchantCredential")
+    @ManyToOne
+    @JoinColumn(name = "merchant_id")
     private Merchant merchant;
 
     public MerchantCredential() {
-
     }
 
     public Integer getId() {
@@ -42,12 +41,12 @@ public class MerchantCredential implements Serializable {
         this.id = id;
     }
 
-    public String getStationName() {
-        return stationName;
+    public String getUser_name() {
+        return user_name;
     }
 
-    public void setStationName(String stationName) {
-        this.stationName = stationName;
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
     }
 
     public String getPassword() {
@@ -80,24 +79,5 @@ public class MerchantCredential implements Serializable {
 
     public void setMerchant(Merchant merchant) {
         this.merchant = merchant;
-    }
-
-    public MerchantCredential(Integer id, String stationName, String password, String status, Integer retryCount) {
-        this.id = id;
-        this.stationName = stationName;
-        this.password = password;
-        this.status = status;
-        this.retryCount = retryCount;
-    }
-
-    @Override
-    public String toString() {
-        return "MerchantCredential{" +
-                "id=" + id +
-                ", stationName='" + stationName + '\'' +
-                ", password='" + password + '\'' +
-                ", status='" + status + '\'' +
-                ", retryCount=" + retryCount +
-                '}';
     }
 }

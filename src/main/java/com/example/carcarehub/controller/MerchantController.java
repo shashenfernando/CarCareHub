@@ -5,6 +5,7 @@ import com.example.carcarehub.domain.Merchant;
 import com.example.carcarehub.model.request.RegisterMerchantRequest;
 import com.example.carcarehub.model.response.CarCareHubResponse;
 import com.example.carcarehub.service.MerchantService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/merchant")
 public class MerchantController {
-    @Autowired
-    MerchantDao merchantDao;
+
     @Autowired
     MerchantService merchantService;
 
@@ -25,11 +25,17 @@ public class MerchantController {
         CarCareHubResponse response = new CarCareHubResponse();
 
         merchant = merchantService.merchantRegistration(registerMerchantRequest);
+        if (merchant != null) {
+            response.setResponseCode("00");
+            response.setResponseObject(merchant);
+
+        } else {
+            response.setResponseCode("999");
+        }
         return response;
 
 
     }
-
 
 
 }

@@ -4,16 +4,17 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "merchant")
+@NamedQuery(name="Merchant.findAll", query="SELECT t FROM Merchant t")
 public class Merchant implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @OneToOne
-    @JoinColumn(name="merchant_credentials_id")
-    private MerchantCredential merchantCredential;
+    @OneToMany(mappedBy = "merchant")
+    private List<MerchantCredential> merchantCredential;
     @Column(name = "station_name", nullable = false, length = 255)
     private String stationName;
     @Column(name = "business_reg_no", nullable = false, length = 255)
@@ -60,11 +61,11 @@ public class Merchant implements Serializable {
         this.id = id;
     }
 
-    public MerchantCredential getMerchantCredential() {
+    public List<MerchantCredential> getMerchantCredential() {
         return merchantCredential;
     }
 
-    public void setMerchantCredential(MerchantCredential merchantCredential) {
+    public void setMerchantCredential(List<MerchantCredential> merchantCredential) {
         this.merchantCredential = merchantCredential;
     }
 
