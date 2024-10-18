@@ -1,9 +1,10 @@
 package com.example.carcarehub.service;
 
-import com.example.carcarehub.Dao.UserCredentialRepository;
-import com.example.carcarehub.Dao.UserRepository;
+import com.example.carcarehub.Dao.UserCredentialDao;
+import com.example.carcarehub.Dao.UserDao;
 import com.example.carcarehub.domain.User;
 import com.example.carcarehub.domain.UserCredential;
+import com.example.carcarehub.enums.Status;
 import com.example.carcarehub.exception.CarCareHubException;
 import com.example.carcarehub.model.request.UserRegistrationRequest;
 import com.example.carcarehub.model.response.UserRegistrationResponse;
@@ -11,25 +12,28 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    public UserRepository userRepository;
+    public UserDao userDao;
     @Autowired
-    public UserCredentialRepository userCredentialRepository;
+    public UserCredentialDao userCredentialDao;
 
     @Override
     public UserRegistrationResponse createUser(UserRegistrationRequest userRegistrationRequest) throws Exception {
 
         User user = new User();
         UserCredential userCredential =new UserCredential();
+        Date date = new Date();
 
         user.setFirstName(userRegistrationRequest.getFirstName());
         user.setLastName(userRegistrationRequest.getLastName());
         user.setNic(userRegistrationRequest.getNic());
         user.setMobileNumber(userRegistrationRequest.getMobileNumber());
-        user.setCreateDate(userRegistrationRequest.getCreateDate());
+        user.setCreateDate(date);
         user.setZipCode(userRegistrationRequest.getZipCode());
         user.setLatitude(userRegistrationRequest.getLatitude());
         user.setLongitude(userRegistrationRequest.getLongitude());
@@ -38,21 +42,19 @@ public class UserServiceImpl implements UserService {
         user.setEmail(userRegistrationRequest.getEmail());
         userCredential.setUserName(userRegistrationRequest.getUserName());
         userCredential.setPassword(userRegistrationRequest.getPassword());
-        userCredential.setStatus(userRegistrationRequest.getStatus());
+        userCredential.setStatus(Status.APPROVED_STATUS.getStatus());
         userCredential.setRetryCount(userRegistrationRequest.getRetryCount());
 
-//        if (!isUserValid(user)){
-//            throw new Exception(CarCareHubException.INVALID_DATA);
+
+//        User existingUser = userRepository.findUserByEmail(user.getEmail());
+//        if (existingUser != null){
+//            throw new Exception(CarCareHubException.THIS_EMAIL_ALREADY_EXIST);
 //        }
-        User existingUser = userRepository.findUserByEmail(user.getEmail());
-        if (existingUser != null){
-            throw new Exception(CarCareHubException.THIS_EMAIL_ALREADY_EXIST);
-        }
         String hashedPassword = hashedPassword(userCredential.getPassword());
         userCredential.setPassword(hashedPassword);
 
-        userRepository.save(user);
-        userCredentialRepository.save(userCredential);
+        userDao.registerUser(user);
+        userCredentialDao.createUserCredential(userCredential);
 
 
         UserRegistrationResponse response = new UserRegistrationResponse();
