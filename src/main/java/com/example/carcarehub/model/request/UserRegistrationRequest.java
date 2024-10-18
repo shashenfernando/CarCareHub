@@ -1,52 +1,25 @@
-package com.example.carcarehub.domain;
-
+package com.example.carcarehub.model.request;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonTypeId;
-import jakarta.persistence.*;
-
-import java.io.Serializable;
 import java.util.Date;
 
-@Entity
-@Table(name = "user")
-public class User implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column(name = "first_name" , nullable = false, length = 255)
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class UserRegistrationRequest {
+
     private String firstName;
-    @Column(name = "last_name" ,nullable = false, length = 255)
     private String lastName;
-    @Column(name = "nic" ,nullable = false, length = 255)
     private String nic;
-    @Column(name = "mobile_number" , nullable = false, length = 255)
     private String mobileNumber;
-    @Column(name = "create_date" , nullable = false)
     private Date createDate;
-    @Column(name = "zip_code" , nullable = false)
     private String zipCode;
-    @Column(name = "longitude" , nullable = false, length = 255)
     private String longitude;
-    @Column(name = "latitude" , nullable = false, length = 255)
     private String latitude;
-    @Column(name = "home_town" , nullable = false, length = 255)
     private String homeTown;
-    @Column(name = "road" ,nullable = false, length = 255)
     private String road;
-    @Column(name = "email" ,nullable = false, length = 255)
     private String email;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="user_credentials_id" , referencedColumnName = "id")
-    private UserCredential userCredential;
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    private String userName;
+    private String password;
+    private String status = "I";
+    private int retryCount = 0;
 
     public String getFirstName() {
         return firstName;
@@ -136,11 +109,35 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public UserCredential getUserCredential() {
-        return userCredential;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUserCredential(UserCredential userCredential) {
-        this.userCredential = userCredential;
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public int getRetryCount() {
+        return retryCount;
+    }
+
+    public void setRetryCount(int retryCount) {
+        this.retryCount = retryCount;
     }
 }
