@@ -8,6 +8,7 @@ import com.example.carcarehub.enums.Status;
 import com.example.carcarehub.exception.CarCareHubException;
 import com.example.carcarehub.model.request.UserRegistrationRequest;
 import com.example.carcarehub.model.response.UserRegistrationResponse;
+import com.example.carcarehub.model.response.UserResponse;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -96,5 +97,31 @@ public class UserServiceImpl implements UserService {
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
+    @Override
+    public UserResponse getUserById(int userId) throws Exception {
 
+        User user = userDao.findUserById(userId);
+
+        UserCredential credential = new UserCredential();
+
+        if (user == null){
+            throw new Exception(CarCareHubException.USER_NOT_FOUND);
+        }
+
+        UserResponse response = new UserResponse();
+        response.setFirstName(user.getFirstName());
+        response.setLastName(user.getLastName());
+        response.setNic(user.getNic());
+        response.setMobileNumber(user.getMobileNumber());
+        response.setStatus(credential.getStatus());
+        response.setZipCode(user.getZipCode());
+        response.setCreateDate(user.getCreateDate());
+        response.setEmail(user.getEmail());
+        response.setLongitude(user.getLongitude());
+        response.setLatitude(user.getLatitude());
+        response.setHomeTown(user.getHomeTown());
+        response.setRoad(user.getRoad());
+
+        return response;
+    }
 }

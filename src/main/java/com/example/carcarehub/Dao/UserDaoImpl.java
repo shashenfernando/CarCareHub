@@ -4,7 +4,6 @@ import com.example.carcarehub.domain.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +42,15 @@ public class UserDaoImpl implements UserDao{
             query.select(from).where(cb.equal(from.get("email"), email));
 
             return em.createQuery(query).getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public User findUserById(int userId) {
+        try {
+            return em.find(User.class, userId);
         } catch (Exception e) {
             return null;
         }
