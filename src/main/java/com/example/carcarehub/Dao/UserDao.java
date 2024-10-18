@@ -5,4 +5,6 @@ import com.example.carcarehub.domain.User;
 
 public interface UserDao {
    public User registerUser(User user);
+
+  public User findUserByEmail(String email);
 }

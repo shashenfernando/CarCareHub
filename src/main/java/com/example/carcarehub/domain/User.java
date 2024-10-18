@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -35,10 +36,8 @@ public class User implements Serializable {
     private String road;
     @Column(name = "email" ,nullable = false, length = 255)
     private String email;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="user_credentials_id" , referencedColumnName = "id")
-    private UserCredential userCredential;
-
+    @OneToMany(mappedBy = "user")
+    private List<UserCredential> userCredentials;
 
     public int getId() {
         return id;
@@ -136,11 +135,11 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public UserCredential getUserCredential() {
-        return userCredential;
+    public List<UserCredential> getUserCredentials() {
+        return userCredentials;
     }
 
-    public void setUserCredential(UserCredential userCredential) {
-        this.userCredential = userCredential;
+    public void setUserCredentials(List<UserCredential> userCredentials) {
+        this.userCredentials = userCredentials;
     }
 }

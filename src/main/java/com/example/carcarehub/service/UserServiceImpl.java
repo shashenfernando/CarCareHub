@@ -40,16 +40,19 @@ public class UserServiceImpl implements UserService {
         user.setHomeTown(userRegistrationRequest.getHomeTown());
         user.setRoad(userRegistrationRequest.getRoad());
         user.setEmail(userRegistrationRequest.getEmail());
+        userCredential.setUser(user);
         userCredential.setUserName(userRegistrationRequest.getUserName());
         userCredential.setPassword(userRegistrationRequest.getPassword());
         userCredential.setStatus(Status.APPROVED_STATUS.getStatus());
         userCredential.setRetryCount(userRegistrationRequest.getRetryCount());
 
 
-//        User existingUser = userRepository.findUserByEmail(user.getEmail());
-//        if (existingUser != null){
-//            throw new Exception(CarCareHubException.THIS_EMAIL_ALREADY_EXIST);
-//        }
+        User existingUser = userDao.findUserByEmail(user.getEmail());
+
+        if (existingUser == null){
+            throw new Exception(CarCareHubException.THIS_EMAIL_ALREADY_EXIST);
+        }
+
         String hashedPassword = hashedPassword(userCredential.getPassword());
         userCredential.setPassword(hashedPassword);
 
