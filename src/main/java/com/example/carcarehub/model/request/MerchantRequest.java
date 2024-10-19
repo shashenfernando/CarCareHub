@@ -3,7 +3,8 @@ package com.example.carcarehub.model.request;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class RegisterMerchantRequest {
+public class MerchantRequest {
+    private int id;
     private String stationName;
     private String businessRegNo;
     private String businessEmail;
@@ -133,4 +134,11 @@ public class RegisterMerchantRequest {
         this.userName = userName;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
