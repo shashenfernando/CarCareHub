@@ -1,51 +1,23 @@
-package com.example.carcarehub.domain;
+package com.example.carcarehub.model.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonTypeId;
-import jakarta.persistence.*;
 
-import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
-@Entity
-@Table(name = "user")
-public class User implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column(name = "first_name" , nullable = false, length = 255)
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class UserResponse {
     private String firstName;
-    @Column(name = "last_name" ,nullable = false, length = 255)
     private String lastName;
-    @Column(name = "nic" ,nullable = false, length = 255)
     private String nic;
-    @Column(name = "mobile_number" , nullable = false, length = 255)
     private String mobileNumber;
-    @Column(name = "create_date" , nullable = false)
     private Date createDate;
-    @Column(name = "zip_code" , nullable = false)
     private String zipCode;
-    @Column(name = "longitude" , nullable = false, length = 255)
     private String longitude;
-    @Column(name = "latitude" , nullable = false, length = 255)
     private String latitude;
-    @Column(name = "home_town" , nullable = false, length = 255)
     private String homeTown;
-    @Column(name = "road" ,nullable = false, length = 255)
     private String road;
-    @Column(name = "email" ,nullable = false, length = 255)
     private String email;
-    @OneToMany(mappedBy = "user")
-    private List<UserCredential> userCredentials;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    private String status ;
 
     public String getFirstName() {
         return firstName;
@@ -135,11 +107,11 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public List<UserCredential> getUserCredentials() {
-        return userCredentials;
+    public String getStatus() {
+        return status;
     }
 
-    public void setUserCredentials(List<UserCredential> userCredentials) {
-        this.userCredentials = userCredentials;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
