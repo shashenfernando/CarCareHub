@@ -29,4 +29,44 @@ public class Count {
     public int getId() {
         return id;
     }
+
+    public int getDailyCount() {
+        return dailyCount;
+    }
+
+    public void setDailyCount(int dailyCount) {
+        this.dailyCount = dailyCount;
+    }
+
+    public int getAvailableCount() {
+        return availableCount;
+    }
+
+    public void setAvailableCount(int availableCount) {
+        this.availableCount = availableCount;
+    }
+
+    public DayOfWeek getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public void setDayOfWeek(DayOfWeek dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
+    }
+
+    public Merchant getMerchant() {
+        return merchant;
+    }
+
+    public void setMerchant(Merchant merchant) {
+        this.merchant = merchant;
+    }
+
+    public ServiceType getService() {
+        return service;
+    }
+
+    public void setService(ServiceType service) {
+        this.service = service;
+    }
 }
