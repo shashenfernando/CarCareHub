@@ -33,4 +33,31 @@ public class MerchantDaoImpl implements MerchantDao {
         }
     }
 
+    @Override
+    public Merchant findMerchantById(Integer id) {
+        return em.find(Merchant.class, id);
+    }
+
+    @Override
+    public Merchant updateMerchant(Merchant merchant) {
+        return em.merge(merchant);
+    }
+
+    @Override
+    public void deleteMerchant(Merchant merchant) {
+        em.remove(merchant);
+    }
+
+    @Override
+    public Merchant findByStationName(String stationName) {
+        try {
+            return em.createQuery(
+                            "SELECT m FROM Merchant m WHERE m.stationName = :stationName", Merchant.class)
+                    .setParameter("stationName", stationName)
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 }
