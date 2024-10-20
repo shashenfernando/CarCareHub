@@ -9,15 +9,16 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
-@Entity
+
 @Table(name = "admin")
 @Transactional
+@Entity
 public class Admin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private int id;
 
     @Column(name = "first_Name", nullable = false, length = 255)
     private String firstName;
@@ -32,7 +33,7 @@ public class Admin {
     private String email;
 
     @Column(name = "contact_number", nullable = false, length = 10)
-    private Long contactNumber;
+    private String contactNumber;
 
     @Column(name = "address", nullable = false, length = 225)
     private String address;
@@ -58,11 +59,11 @@ public class Admin {
  //-------------------- getters & setters -------------------------------
 
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -98,11 +99,11 @@ public class Admin {
         this.email = email;
     }
 
-    public Long getContactNumber() {
+    public String getContactNumber() {
         return contactNumber;
     }
 
-    public void setContactNumber(Long contactNumber) {
+    public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
     }
 

@@ -5,20 +5,20 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.transaction.Transactional;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
-@Entity
+
 @Table(name = "admin_credential")
 @Transactional
+@Entity
 public class AdminCredential {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private int id;
 
     @Column(name = "user_Name", nullable = false, length = 25)
     private String userName;
@@ -36,11 +36,11 @@ public class AdminCredential {
 
 //------------------------------------------------------------
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

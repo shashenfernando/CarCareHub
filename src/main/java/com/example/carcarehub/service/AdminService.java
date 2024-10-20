@@ -11,34 +11,5 @@ import java.util.Optional;
 
 @Service
 public interface AdminService {
-
-    /**
-     * Gets the all admins
-     *
-     * @return the all admins
-     */
-    List<Admin> getAllAdmin();
-
-    /**
-     * Gets the admins by id
-     *
-     * @param id the id
-     * @return the admin
-     */
-    Optional<Admin> getAdminById(Long id);
-
-    /**
-     * Saves the given admin
-     *
-     * @param adminResource the object to save
-     * @return the saved admin
-     */
-    AdminAddResponse saveAdmin(AdminAddRequest adminResource);
-
-    /**
-     * Updates the admin object by given object
-     *
-     * @return the updated admin object
-     */
-    Admin updateAdmin(AdminUpdateRequest adminUpdateRequest, Long id);
+   public AdminAddResponse saveAdmin(AdminAddRequest adminAddRequest) throws Exception;
 }

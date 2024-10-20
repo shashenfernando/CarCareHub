@@ -15,8 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/admin")
-@CrossOrigin(origins = "*")
+@RequestMapping(value = "api/admin")
 public class AdminController {
 
     @Autowired
@@ -27,15 +26,15 @@ public class AdminController {
      *
      * @return List<Admin>
      */
-    @GetMapping(value = "/all")
-    public ResponseEntity<Object> getAllAdmin(){
-        List<Admin> admins = adminService.getAllAdmin();
-        if (admins != null && !admins.isEmpty()){
-            return new ResponseEntity<>(admins, HttpStatus.OK);
-        }else{
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
+//    @GetMapping(value = "/all")
+//    public ResponseEntity<Object> getAllAdmin(){
+//        List<Admin> admins = adminService.getAllAdmin();
+//        if (admins != null && !admins.isEmpty()){
+//            return new ResponseEntity<>(admins, HttpStatus.OK);
+//        }else{
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//    }
 
     /**
      * Gets the admins by id
@@ -43,15 +42,15 @@ public class AdminController {
      * @param id the id
      * @return Optional<Admin>
      */
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Object> getAdminById(@PathVariable Long id){
-        Optional<Admin> optionalAdmin = adminService.getAdminById(id);
-        if (optionalAdmin.isPresent()){
-            return new ResponseEntity<>(optionalAdmin, HttpStatus.OK);
-        }else{
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
+//    @GetMapping(value = "/{id}")
+//    public ResponseEntity<Object> getAdminById(@PathVariable Long id){
+//        Optional<Admin> optionalAdmin = adminService.getAdminById(id);
+//        if (optionalAdmin.isPresent()){
+//            return new ResponseEntity<>(optionalAdmin, HttpStatus.OK);
+//        }else{
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//    }
 
     /**
      * Saves the given admin
@@ -60,24 +59,24 @@ public class AdminController {
      * @return the saved admin
      */
     @RequestMapping(method = RequestMethod.POST , value ="/save")
-    public CarCareHubResponse saveAdmin(@RequestBody AdminAddRequest adminAddRequest){
+    public CarCareHubResponse saveAdmin(@RequestBody AdminAddRequest adminAddRequest) throws Exception {
 
         AdminAddResponse newAdmin = adminService.saveAdmin(adminAddRequest);
         CarCareHubResponse response = new CarCareHubResponse();
-        response.setResponseCode("11");
+        response.setResponseCode("000");
         response.setResponseObject(newAdmin);
         return response;
     }
 
-    @PutMapping(value = "/update/{id}")
-    public ResponseEntity<Object> updateAdmin(@RequestBody AdminUpdateRequest adminUpdateRequest, @PathVariable Long id){
-
-        Optional<Admin> optionalAdmin = adminService.getAdminById(id);
-        if (optionalAdmin.isPresent()){
-            Admin newAdmin = adminService.updateAdmin(adminUpdateRequest, id);
-            return new ResponseEntity<>(newAdmin, HttpStatus.OK);
-        }else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
+//    @PutMapping(value = "/update/{id}")
+//    public ResponseEntity<Object> updateAdmin(@RequestBody AdminUpdateRequest adminUpdateRequest, @PathVariable Long id){
+//
+//        Optional<Admin> optionalAdmin = adminService.getAdminById(id);
+//        if (optionalAdmin.isPresent()){
+//            Admin newAdmin = adminService.updateAdmin(adminUpdateRequest, id);
+//            return new ResponseEntity<>(newAdmin, HttpStatus.OK);
+//        }else {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//    }
 }

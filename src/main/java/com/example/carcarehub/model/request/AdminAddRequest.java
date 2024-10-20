@@ -11,13 +11,13 @@ public class AdminAddRequest {
     private String lastName;
     private String nicNumber;
     private String email;
-    private Long contactNumber;
+    private String contactNumber;
     private String address;
     private String role;
     private String profilePicture;
     private String password;
     private String userName;
-    private String lastLogin;
+    private Date lastLogin;
     private String createdUser;
 
 //-----------------------------------------------------------
@@ -54,11 +54,11 @@ public class AdminAddRequest {
         this.email = email;
     }
 
-    public Long getContactNumber() {
+    public String getContactNumber() {
         return contactNumber;
     }
 
-    public void setContactNumber(Long contactNumber) {
+    public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
     }
 
@@ -102,11 +102,11 @@ public class AdminAddRequest {
         this.userName = userName;
     }
 
-    public String getLastLogin() {
+    public Date getLastLogin() {
         return lastLogin;
     }
 
-    public void setLastLogin(String lastLogin) {
+    public void setLastLogin(Date lastLogin) {
         this.lastLogin = lastLogin;
     }
 

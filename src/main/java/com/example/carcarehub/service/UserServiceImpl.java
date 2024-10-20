@@ -16,10 +16,9 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-<<<<<<< HEAD
+
 import org.springframework.transaction.annotation.Propagation;
-=======
->>>>>>> 90ae1377e5667555bbb52519fb65aaf777abb6b8
+
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -64,11 +63,7 @@ public class UserServiceImpl implements UserService {
         User existingUser = userDao.findUserByEmail(user.getEmail());
 
         if (existingUser != null){
-<<<<<<< HEAD
-            throw new Exception(CarCareHubException.THIS_EMAIL_ALREADY_EXIST);
-=======
             throw new Exception(String.valueOf(CarCareHubException.THIS_EMAIL_ALREADY_EXIST));
->>>>>>> 90ae1377e5667555bbb52519fb65aaf777abb6b8
         }
 
         String hashedPassword = hashedPassword(userCredential.getPassword());

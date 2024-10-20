@@ -10,7 +10,7 @@ public class AdminAddResponse {
     private String lastName;
     private String nicNumber;
     private String email;
-    private Long contactNumber;
+    private String contactNumber;
     private String address;
     private String role;
     private String profilePicture;
@@ -58,11 +58,11 @@ public class AdminAddResponse {
         this.email = email;
     }
 
-    public Long getContactNumber() {
+    public String getContactNumber() {
         return contactNumber;
     }
 
-    public void setContactNumber(Long contactNumber) {
+    public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
     }
 
