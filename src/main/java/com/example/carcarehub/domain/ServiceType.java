@@ -44,4 +44,68 @@ public class ServiceType {
     public Integer getId() {
         return id;
     }
+
+    public String getServiceType() {
+        return serviceType;
+    }
+
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public Date getAverageTime() {
+        return averageTime;
+    }
+
+    public void setAverageTime(Date averageTime) {
+        this.averageTime = averageTime;
+    }
+
+    public int getAvailableCount() {
+        return availableCount;
+    }
+
+    public void setAvailableCount(int availableCount) {
+        this.availableCount = availableCount;
+    }
+
+    public VehicleType getVehicleType() {
+        return vehicleType;
+    }
+
+    public void setVehicleType(VehicleType vehicleType) {
+        this.vehicleType = vehicleType;
+    }
+
+    public Merchant getMerchant() {
+        return merchant;
+    }
+
+    public void setMerchant(Merchant merchant) {
+        this.merchant = merchant;
+    }
 }

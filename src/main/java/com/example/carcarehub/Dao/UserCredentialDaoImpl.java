@@ -1,5 +1,6 @@
 package com.example.carcarehub.Dao;
 
+import com.example.carcarehub.domain.User;
 import com.example.carcarehub.domain.UserCredential;
 import jakarta.persistence.EntityManager;
 import org.slf4j.Logger;
@@ -24,5 +25,11 @@ public class UserCredentialDaoImpl implements UserCredentialDao {
             e.printStackTrace();
             return null;
         }
+    }
+    @Override
+    public void deleteUserCredentials(User user) {
+        em.createQuery("DELETE FROM UserCredential uc WHERE uc.user = :user")
+                .setParameter("user", user)
+                .executeUpdate();
     }
 }

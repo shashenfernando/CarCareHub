@@ -4,19 +4,28 @@ import com.example.carcarehub.Dao.UserCredentialDao;
 import com.example.carcarehub.Dao.UserDao;
 import com.example.carcarehub.domain.User;
 import com.example.carcarehub.domain.UserCredential;
+import com.example.carcarehub.enums.CarCareHubException;
 import com.example.carcarehub.enums.Status;
-import com.example.carcarehub.exception.CarCareHubException;
+import com.example.carcarehub.model.request.UpdateUser;
 import com.example.carcarehub.model.request.UserRegistrationRequest;
+import com.example.carcarehub.model.response.CarCareHubUserListResponse;
+import com.example.carcarehub.model.response.UpdateUserResponse;
 import com.example.carcarehub.model.response.UserRegistrationResponse;
 import com.example.carcarehub.model.response.UserResponse;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+<<<<<<< HEAD
 import org.springframework.transaction.annotation.Propagation;
+=======
+>>>>>>> 90ae1377e5667555bbb52519fb65aaf777abb6b8
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 @Component
 @Transactional(propagation = Propagation.REQUIRES_NEW)
@@ -55,7 +64,11 @@ public class UserServiceImpl implements UserService {
         User existingUser = userDao.findUserByEmail(user.getEmail());
 
         if (existingUser != null){
+<<<<<<< HEAD
             throw new Exception(CarCareHubException.THIS_EMAIL_ALREADY_EXIST);
+=======
+            throw new Exception(String.valueOf(CarCareHubException.THIS_EMAIL_ALREADY_EXIST));
+>>>>>>> 90ae1377e5667555bbb52519fb65aaf777abb6b8
         }
 
         String hashedPassword = hashedPassword(userCredential.getPassword());
@@ -109,7 +122,7 @@ public class UserServiceImpl implements UserService {
         UserCredential credential = new UserCredential();
 
         if (user == null){
-            throw new Exception(CarCareHubException.USER_NOT_FOUND);
+            throw new Exception(String.valueOf(CarCareHubException.USER_NOT_FOUND));
         }
 
         UserResponse response = new UserResponse();
@@ -128,4 +141,93 @@ public class UserServiceImpl implements UserService {
 
         return response;
     }
+    @Override
+    public List<CarCareHubUserListResponse> getCarCareHubUsersList() throws Exception {
+
+      List<User>users=userDao.getUserList();
+      List<CarCareHubUserListResponse> responses = new ArrayList<>();
+
+      for (User user :users){
+
+          CarCareHubUserListResponse response = new CarCareHubUserListResponse();
+          response.setFirstName(user.getFirstName());
+          response.setLastName(user.getLastName());
+          response.setNic(user.getNic());
+          response.setMobileNumber(user.getMobileNumber());
+          response.setCreateDate(user.getCreateDate());
+          response.setZipCode(user.getZipCode());
+          response.setHomeTown(user.getHomeTown());
+          response.setRoad(user.getRoad());
+          response.setEmail(user.getEmail());
+          responses.add(response);
+      }
+
+      if (responses == null){
+          throw new Exception(String.valueOf(CarCareHubException.NO_USERS_DATA_FOUND));
+      }
+      else {
+          return responses;
+      }
+    }
+
+    @Override
+    @Transactional
+    public UpdateUserResponse updateUser(int userId, UpdateUser updateUser) throws Exception {
+
+        User user = userDao.findUserById(userId);
+
+        if (user == null){
+            throw new Exception(String.valueOf(CarCareHubException.USER_NOT_FOUND));
+        }
+        user.setFirstName(updateUser.getFirstName());
+        user.setLastName(updateUser.getLastName());
+        user.setNic(updateUser.getNic());
+        user.setMobileNumber(updateUser.getMobileNumber());
+        user.setZipCode(updateUser.getZipCode());
+        user.setHomeTown(updateUser.getHomeTown());
+        user.setRoad(updateUser.getRoad());
+
+        userDao.updateUser(user);
+
+        if (user != null){
+            UpdateUserResponse response = new UpdateUserResponse();
+            response.setFirstName(user.getFirstName());
+            response.setLastName(user.getLastName());
+            response.setNic(user.getNic());
+            response.setMobileNumber(user.getMobileNumber());
+            response.setZipCode(user.getZipCode());
+            response.setHomeTown(user.getHomeTown());
+            response.setRoad(user.getRoad());
+
+            return response;
+        }
+        else {
+            throw new Exception(String.valueOf(CarCareHubException.UNKNOWN_ERROR_OCCURED));
+        }
+    }
+
+    @Override
+    public HashMap<String, String> deleteCarCareHubUserById(int userid) throws Exception {
+
+        HashMap<String, String> hashMap =new HashMap<>();
+
+        User user = userDao.findUserById(userid);
+
+
+        if (user == null){
+            throw new Exception(String.valueOf(CarCareHubException.USER_NOT_FOUND));
+        }
+        try {
+            userCredentialDao.deleteUserCredentials(user);
+            userDao.deleteUser(user);
+            hashMap.put("status", "success");
+            hashMap.put("message", "User deleted successfully.");
+        }
+        catch (Exception e){
+            hashMap.put("status", "error");
+            hashMap.put("message", "An error occurred while deleting the user: " + e.getMessage());
+        }
+        return hashMap;
+    }
+
 }
