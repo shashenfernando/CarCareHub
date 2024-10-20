@@ -1,48 +1,60 @@
 package com.example.carcarehub.controller;
+
 import com.example.carcarehub.domain.ServiceType;
+import com.example.carcarehub.model.response.CarCareHubResponse;
+import com.example.carcarehub.model.response.ServiceTypeResponse;
 import com.example.carcarehub.service.ServiceTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/api/service-types")
+@RequestMapping("/api/service-type")
 public class ServiceTypeController {
 
-    private final ServiceTypeService serviceTypeService;
-
     @Autowired
-    public ServiceTypeController(ServiceTypeService serviceTypeService) {
-        this.serviceTypeService = serviceTypeService;
+    private ServiceTypeService serviceTypeService;
+
+    @RequestMapping(method = RequestMethod.POST, value = "/createServiceType")
+    public CarCareHubResponse createServiceType(@RequestBody ServiceType serviceTypeRequest) throws Exception {
+
+        ServiceType response = serviceTypeService.createServiceType(serviceTypeRequest);
+        CarCareHubResponse carCareHubResponse = new CarCareHubResponse();
+        carCareHubResponse.setResponseCode("00");
+        carCareHubResponse.setResponseObject(response);
+
+        return carCareHubResponse;
     }
 
-    @GetMapping
-    public List<ServiceType> getAllServiceTypes() {
-        return serviceTypeService.getAllServiceTypes();
+    @RequestMapping(method = RequestMethod.GET, value = "/{serviceTypeId}/getServiceType")
+    public CarCareHubResponse getServiceTypeById(@PathVariable("serviceTypeId") int serviceTypeId) throws Exception {
+
+        ServiceType response = serviceTypeService.getServiceTypeById(serviceTypeId);
+        CarCareHubResponse carCareHubResponse = new CarCareHubResponse();
+        carCareHubResponse.setResponseCode("000");
+        carCareHubResponse.setResponseObject(response);
+
+        return carCareHubResponse;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ServiceType> getServiceTypeById(@PathVariable Integer id) {
-        ServiceType serviceType = serviceTypeService.getServiceTypeById(id);
-        return serviceType != null ? ResponseEntity.ok(serviceType) : ResponseEntity.notFound().build();
+    @RequestMapping(method = RequestMethod.PUT, value = "/{serviceTypeId}/updateServiceType")
+    public CarCareHubResponse updateServiceType(@PathVariable("serviceTypeId") int serviceTypeId, @RequestBody ServiceType updatedServiceTypeRequest) throws Exception {
+
+        ServiceType response = serviceTypeService.updateServiceType(serviceTypeId, updatedServiceTypeRequest);
+        CarCareHubResponse carCareHubResponse = new CarCareHubResponse();
+        carCareHubResponse.setResponseCode("00");
+        carCareHubResponse.setResponseObject(response);
+
+        return carCareHubResponse;
     }
 
-    @PostMapping
-    public ResponseEntity<ServiceType> createServiceType(@RequestBody ServiceType serviceType) {
-        return ResponseEntity.ok(serviceTypeService.createServiceType(serviceType));
-    }
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{serviceTypeId}/deleteServiceType")
+    public CarCareHubResponse deleteServiceType(@PathVariable("serviceTypeId") int serviceTypeId) throws Exception {
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ServiceType> updateServiceType(@PathVariable Integer id, @RequestBody ServiceType updatedServiceType) {
-        ServiceType serviceType = serviceTypeService.updateServiceType(id, updatedServiceType);
-        return serviceType != null ? ResponseEntity.ok(serviceType) : ResponseEntity.notFound().build();
-    }
+        boolean isDeleted = serviceTypeService.deleteServiceType(serviceTypeId);
+        CarCareHubResponse carCareHubResponse = new CarCareHubResponse();
+        carCareHubResponse.setResponseCode(isDeleted ? "00" : "01");
+        carCareHubResponse.setResponseObject(isDeleted ? "Service Type deleted successfully" : "Service Type not found");
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteServiceType(@PathVariable Integer id) {
-        boolean deleted = serviceTypeService.deleteServiceType(id);
-        return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+        return carCareHubResponse;
     }
 }
