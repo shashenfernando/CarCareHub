@@ -11,11 +11,15 @@ import com.example.carcarehub.model.response.UserRegistrationResponse;
 import com.example.carcarehub.model.response.UserResponse;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
-@Service
+@Component
+@Transactional(propagation = Propagation.REQUIRES_NEW)
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -50,7 +54,7 @@ public class UserServiceImpl implements UserService {
 
         User existingUser = userDao.findUserByEmail(user.getEmail());
 
-        if (existingUser == null){
+        if (existingUser != null){
             throw new Exception(CarCareHubException.THIS_EMAIL_ALREADY_EXIST);
         }
 

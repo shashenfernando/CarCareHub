@@ -1,8 +1,12 @@
 package com.example.carcarehub.domain;
 
-import org.springframework.transaction.annotation.Transactional;
+import jakarta.transaction.Transactional;
 
 import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
@@ -15,37 +19,34 @@ public class Admin {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "first_Name")
+    @Column(name = "first_Name", nullable = false, length = 255)
     private String firstName;
 
-    @Column(name = "last_Name")
+    @Column(name = "last_Name", nullable = false, length = 255)
     private String lastName;
 
-    @Column(name = "nic_number")
+    @Column(name = "nic_number", nullable = false, length = 12)
     private String nicNumber;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "contact_number")
-    private int contactNumber;
+    @Column(name = "contact_number", nullable = false, length = 10)
+    private Long contactNumber;
 
-    @Column(name = "address")
+    @Column(name = "address", nullable = false, length = 225)
     private String address;
 
-    @Column(name = "user_name")
-    private String userName;
-
-    @Column(name = "role")
+    @Column(name = "role", nullable = false, length = 25)
     private String role;
 
-    @Column(name = "profile_picture")
+    @Column(name = "profile_picture", nullable = true)
     private String profilePicture;
 
-    @Column(name = "created_date")
+    @Column(name = "created_date", nullable = false)
     private Date createdDate;
 
-    @Column(name = "created_user")
+    @Column(name = "created_user", nullable = false)
     private String createdUser;
 
     @Column(name = "modified_date")
@@ -97,11 +98,11 @@ public class Admin {
         this.email = email;
     }
 
-    public int getContactNumber() {
+    public Long getContactNumber() {
         return contactNumber;
     }
 
-    public void setContactNumber(int contactNumber) {
+    public void setContactNumber(Long contactNumber) {
         this.contactNumber = contactNumber;
     }
 
@@ -111,14 +112,6 @@ public class Admin {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getRole() {
