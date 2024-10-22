@@ -18,7 +18,10 @@ public enum CarCareHubException {
     MERCHANT_NOT_FOUND ( "114","Merchant not found"),
     ADMIN_NOT_FOUND ( "115","Admin not found"),
     MERCHANT_DATA_NOT_FOUND ("116","Merchant data not found"),
-    ADMIN_DATA_NOT_FOUND ("117","Admin data not found");
+    ADMIN_DATA_NOT_FOUND ("117","Admin data not found"),
+    THIS_USER_NAME_ALREADY_EXIST ("118","This user name already exists"),
+    THIS_NIC_NUMBER_ALREADY_EXIST ("119","This nic number already exists"),
+    THIS_MOBILE_NUMBER_ALREADY_EXIST ("120","This mobile number already exists");
 
 
     private String statusCode;

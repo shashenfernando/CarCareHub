@@ -1,8 +1,10 @@
 package com.example.carcarehub.domain;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "admin")
@@ -10,46 +12,33 @@ public class Admin implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private int id;
-
-    @Column(name = "first_Name", nullable = false, length = 255)
+    @Column(name = "first_name" , nullable = false, length = 255)
     private String firstName;
-
-    @Column(name = "last_Name", nullable = false, length = 255)
+    @Column(name = "last_name" ,nullable = false, length = 255)
     private String lastName;
-
-    @Column(name = "nic_number", nullable = false, length = 12)
-    private String nicNumber;
-
-    @Column(name = "email", nullable = false)
-    private String email;
-
-    @Column(name = "contact_number", nullable = false, length = 10)
-    private String contactNumber;
-
-    @Column(name = "address", nullable = false, length = 225)
-    private String address;
-
-    @Column(name = "role", nullable = false, length = 25)
-    private String role;
-
-    @Column(name = "profile_picture", nullable = true)
-    private String profilePicture;
-
-    @Column(name = "created_date", nullable = false)
-    private Date createdDate;
-
+    @Column(name = "nic" ,nullable = false, length = 255)
+    private String nic;
+    @Column(name = "mobile_number" , nullable = false, length = 255)
+    private String mobileNumber;
+    @Column(name = "create_date" , nullable = false)
+    private Date createDate;
     @Column(name = "created_user", nullable = false)
     private String createdUser;
-
     @Column(name = "modified_date")
     private Date modifiedDate;
-
     @Column(name = "modified_user")
     private String modifiedUser;
+    @Column(name = "profile_picture" , nullable = true)
+    private String profilePicture;
+    @Column(name = "address" , nullable = false, length = 255)
+    private String address;
+    @Column(name = "role" ,nullable = false, length = 255)
+    private String role;
+    @Column(name = "email" ,nullable = false, length = 255)
+    private String email;
 
-
+//----------------------------------------------------------------
     public int getId() {
         return id;
     }
@@ -74,60 +63,28 @@ public class Admin implements Serializable {
         this.lastName = lastName;
     }
 
-    public String getNicNumber() {
-        return nicNumber;
+    public String getNic() {
+        return nic;
     }
 
-    public void setNicNumber(String nicNumber) {
-        this.nicNumber = nicNumber;
+    public void setNic(String nic) {
+        this.nic = nic;
     }
 
-    public String getEmail() {
-        return email;
+    public String getMobileNumber() {
+        return mobileNumber;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
     }
 
-    public String getContactNumber() {
-        return contactNumber;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setContactNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getProfilePicture() {
-        return profilePicture;
-    }
-
-    public void setProfilePicture(String profilePicture) {
-        this.profilePicture = profilePicture;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     public String getCreatedUser() {
@@ -152,5 +109,37 @@ public class Admin implements Serializable {
 
     public void setModifiedUser(String modifiedUser) {
         this.modifiedUser = modifiedUser;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

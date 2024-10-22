@@ -3,14 +3,14 @@ package com.example.carcarehub.model.response;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AdminAddResponse {
+public class AdminResponse {
 
-    private long id;
+    private int id;
     private String firstName;
     private String lastName;
     private String nicNumber;
     private String email;
-    private String contactNumber;
+    private String mobileNumber;
     private String address;
     private String role;
     private String profilePicture;
@@ -18,11 +18,11 @@ public class AdminAddResponse {
 //------------------------------------------------
 
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -58,12 +58,12 @@ public class AdminAddResponse {
         this.email = email;
     }
 
-    public String getContactNumber() {
-        return contactNumber;
+    public String getMobileNumber() {
+        return mobileNumber;
     }
 
-    public void setContactNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
+    public void setMobileNumber(String contactNumber) {
+        this.mobileNumber = contactNumber;
     }
 
     public String getAddress() {

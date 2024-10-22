@@ -9,9 +9,9 @@ public class AdminAddRequest {
 
     private String firstName;
     private String lastName;
-    private String nicNumber;
+    private String nic;
     private String email;
-    private String contactNumber;
+    private String mobileNumber;
     private String address;
     private String role;
     private String profilePicture;
@@ -21,6 +21,7 @@ public class AdminAddRequest {
     private String createdUser;
 
 //-----------------------------------------------------------
+
 
     public String getFirstName() {
         return firstName;
@@ -38,12 +39,12 @@ public class AdminAddRequest {
         this.lastName = lastName;
     }
 
-    public String getNicNumber() {
-        return nicNumber;
+    public String getNic() {
+        return nic;
     }
 
-    public void setNicNumber(String nicNumber) {
-        this.nicNumber = nicNumber;
+    public void setNic(String nic) {
+        this.nic = nic;
     }
 
     public String getEmail() {
@@ -54,12 +55,12 @@ public class AdminAddRequest {
         this.email = email;
     }
 
-    public String getContactNumber() {
-        return contactNumber;
+    public String getMobileNumber() {
+        return mobileNumber;
     }
 
-    public void setContactNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
     }
 
     public String getAddress() {
