@@ -1,19 +1,12 @@
 package com.example.carcarehub.domain;
 
-import jakarta.transaction.Transactional;
-
 import javax.persistence.*;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Date;
 
-
-@Table(name = "admin")
-@Transactional
 @Entity
-public class Admin {
+@Table(name = "admin")
+public class Admin implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,8 +48,6 @@ public class Admin {
 
     @Column(name = "modified_user")
     private String modifiedUser;
-
- //-------------------- getters & setters -------------------------------
 
 
     public int getId() {
