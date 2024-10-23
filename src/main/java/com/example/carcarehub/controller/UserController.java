@@ -27,7 +27,7 @@ public class UserController {
 
         UserRegistrationResponse response = userService.createUser(userRegistrationRequest);
         CarCareHubResponse careHubResponse = new CarCareHubResponse();
-        careHubResponse.setResponseCode("00");
+        careHubResponse.setResponseCode("000");
         careHubResponse.setResponseObject(response);
 
         return careHubResponse;
