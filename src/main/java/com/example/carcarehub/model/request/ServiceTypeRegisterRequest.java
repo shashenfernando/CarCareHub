@@ -1,9 +1,16 @@
-package com.example.carcarehub.model.response;
+package com.example.carcarehub.model.request;
 
+import com.example.carcarehub.domain.Merchant;
+import com.example.carcarehub.domain.VehicleType;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.Column;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+
+import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ServiceTypeResponse{
+public class ServiceTypeRegisterRequest {
 
     private String serviceType;
     private String description;
@@ -11,7 +18,9 @@ public class ServiceTypeResponse{
     private String price;
     private String averageTime;
     private int availableCount;
-    private String VehicleType;
+    private VehicleType vehicleType;
+    private Merchant merchant;
+
 
     public String getServiceType() {
         return serviceType;
@@ -60,13 +69,19 @@ public class ServiceTypeResponse{
     public void setAvailableCount(int availableCount) {
         this.availableCount = availableCount;
     }
-
-    public String getVehicleType() {
-        return VehicleType;
+    public VehicleType getVehicleType() {
+        return vehicleType;
     }
 
-    public void setVehicleType(String vehicleType) {
-        VehicleType = vehicleType;
+    public void setVehicleType(VehicleType vehicleType) {
+        this.vehicleType = vehicleType;
+    }
+
+    public Merchant getMerchant() {
+        return merchant;
+    }
+
+    public void setMerchant(Merchant merchant) {
+        this.merchant = merchant;
     }
 }
-

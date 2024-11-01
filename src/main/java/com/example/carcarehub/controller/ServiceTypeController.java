@@ -1,7 +1,9 @@
 package com.example.carcarehub.controller;
 
 import com.example.carcarehub.domain.ServiceType;
+import com.example.carcarehub.model.request.ServiceTypeRegisterRequest;
 import com.example.carcarehub.model.response.CarCareHubResponse;
+import com.example.carcarehub.model.response.ServiceTypeListResponse;
 import com.example.carcarehub.model.response.ServiceTypeResponse;
 import com.example.carcarehub.service.ServiceTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +17,9 @@ public class ServiceTypeController {
     private ServiceTypeService serviceTypeService;
 
     @RequestMapping(method = RequestMethod.POST, value = "/createServiceType")
-    public CarCareHubResponse createServiceType(@RequestBody ServiceType serviceTypeRequest) throws Exception {
+    public CarCareHubResponse createServiceType(@RequestBody ServiceTypeRegisterRequest serviceTypeRequest) throws Exception {
 
-        ServiceType response = serviceTypeService.createServiceType(serviceTypeRequest);
+        ServiceTypeResponse response = serviceTypeService.createServiceType(serviceTypeRequest);
         CarCareHubResponse carCareHubResponse = new CarCareHubResponse();
         carCareHubResponse.setResponseCode("00");
         carCareHubResponse.setResponseObject(response);
@@ -28,7 +30,7 @@ public class ServiceTypeController {
     @RequestMapping(method = RequestMethod.GET, value = "/{serviceTypeId}/getServiceType")
     public CarCareHubResponse getServiceTypeById(@PathVariable("serviceTypeId") int serviceTypeId) throws Exception {
 
-        ServiceType response = serviceTypeService.getServiceTypeById(serviceTypeId);
+        ServiceTypeListResponse response = serviceTypeService.getServiceTypeById(serviceTypeId);
         CarCareHubResponse carCareHubResponse = new CarCareHubResponse();
         carCareHubResponse.setResponseCode("000");
         carCareHubResponse.setResponseObject(response);

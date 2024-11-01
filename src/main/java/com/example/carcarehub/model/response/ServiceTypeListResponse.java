@@ -3,8 +3,8 @@ package com.example.carcarehub.model.response;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ServiceTypeResponse{
-
+public class ServiceTypeListResponse {
+    private int id;
     private String serviceType;
     private String description;
     private String status;
@@ -12,6 +12,14 @@ public class ServiceTypeResponse{
     private String averageTime;
     private int availableCount;
     private String VehicleType;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getServiceType() {
         return serviceType;
@@ -69,4 +77,3 @@ public class ServiceTypeResponse{
         VehicleType = vehicleType;
     }
 }
-

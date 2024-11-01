@@ -24,7 +24,7 @@ public class ServiceType {
     private String price;
 
     @Column(name = "average_time", nullable = false, length = 255)
-    private Date averageTime;
+    private String averageTime;
 
     private int availableCount;
 
@@ -77,11 +77,11 @@ public class ServiceType {
         this.price = price;
     }
 
-    public Date getAverageTime() {
+    public String getAverageTime() {
         return averageTime;
     }
 
-    public void setAverageTime(Date averageTime) {
+    public void setAverageTime(String averageTime) {
         this.averageTime = averageTime;
     }
 
