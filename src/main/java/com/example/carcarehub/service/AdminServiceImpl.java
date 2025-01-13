@@ -8,6 +8,7 @@ import com.example.carcarehub.enums.CarCareHubException;
 import com.example.carcarehub.model.request.AdminAddRequest;
 import com.example.carcarehub.model.request.AdminUpdateRequest;
 import com.example.carcarehub.model.response.AdminResponse;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -113,7 +114,9 @@ public class AdminServiceImpl implements AdminService{
             return Optional.empty();
         }
     }
-
+    private String hashedPassword(String password) {
+        return BCrypt.hashpw(password, BCrypt.gensalt());
+    }
     @Override
     public Admin saveAdmin(AdminAddRequest adminAddRequest) throws Exception {
 
@@ -140,7 +143,7 @@ public class AdminServiceImpl implements AdminService{
         Admin admin = new Admin();
         Date date = new Date();
         AdminCredential adminCredential = new AdminCredential();
-
+        String encryptedPassword = hashedPassword(adminAddRequest.getPassword());
         admin.setFirstName(adminAddRequest.getFirstName());
         admin.setLastName(adminAddRequest.getLastName());
         admin.setNic(adminAddRequest.getNic());
@@ -151,7 +154,7 @@ public class AdminServiceImpl implements AdminService{
         admin.setProfilePicture(adminAddRequest.getProfilePicture());
         admin.setCreateDate(date);
         adminCredential.setAdmin(admin);
-        adminCredential.setPassword(adminAddRequest.getPassword());
+        adminCredential.setPassword(encryptedPassword);
         adminCredential.setUserName(adminAddRequest.getUserName());
         adminCredential.setLastLogin(adminAddRequest.getLastLogin());
         admin.setCreatedUser(adminAddRequest.getCreatedUser());

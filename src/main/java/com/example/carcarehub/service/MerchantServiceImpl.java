@@ -9,6 +9,7 @@ import com.example.carcarehub.enums.CarCareHubException;
 import com.example.carcarehub.exception.CarCareHubException2;
 import com.example.carcarehub.model.request.MerchantRequest;
 import com.example.carcarehub.utill.MerchantEncryption;
+import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,9 @@ public class MerchantServiceImpl implements MerchantService {
     private MerchantCredentialDao merchantCredentialDao;
 
 
-
+    private String hashedPassword(String password) {
+        return BCrypt.hashpw(password, BCrypt.gensalt());
+    }
     @Override
     @Transactional
     public Merchant merchantRegistration(MerchantRequest merchantRequest) throws Exception {
@@ -67,7 +70,7 @@ public class MerchantServiceImpl implements MerchantService {
 
             if (merchant != null) {
 
-                String encryptedPassword = MerchantEncryption.encrypt(merchantRequest.getPassword());
+                String encryptedPassword = hashedPassword(merchantRequest.getPassword());
 
                 merchantCredential.setMerchant(merchant);
                 merchantCredential.setPassword(encryptedPassword);

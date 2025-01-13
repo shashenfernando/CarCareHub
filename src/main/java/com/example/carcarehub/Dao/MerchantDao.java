@@ -10,4 +10,5 @@ public interface MerchantDao {
 
     void deleteMerchant(Merchant merchant);
     Merchant findByStationName(String stationName);
+    Merchant findMerchantByEmail(String email);
 }

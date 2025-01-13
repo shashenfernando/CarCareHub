@@ -2,6 +2,9 @@ package com.example.carcarehub.Dao;
 
 import com.example.carcarehub.domain.Merchant;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +58,20 @@ public class MerchantDaoImpl implements MerchantDao {
                             "SELECT m FROM Merchant m WHERE m.stationName = :stationName", Merchant.class)
                     .setParameter("stationName", stationName)
                     .getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    @Override
+    public Merchant findMerchantByEmail(String email) {
+        try {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Merchant> query = cb.createQuery(Merchant.class);
+            Root<Merchant> from = query.from(Merchant.class);
+
+            query.select(from).where(cb.equal(from.get("businessEmail"), email));
+
+            return em.createQuery(query).getSingleResult();
         } catch (Exception e) {
             return null;
         }

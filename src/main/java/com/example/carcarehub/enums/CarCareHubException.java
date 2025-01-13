@@ -22,7 +22,9 @@ public enum CarCareHubException {
     THIS_USER_NAME_ALREADY_EXIST ("118","This user name already exists"),
     THIS_NIC_NUMBER_ALREADY_EXIST ("119","This nic number already exists"),
     THIS_MOBILE_NUMBER_ALREADY_EXIST ("120","This mobile number already exists"),
-    SERVICE_TYPE_NOT_FOUND ( "121","This service type not found");
+    SERVICE_TYPE_NOT_FOUND ( "121","This service type not found"),
+    EMAIL_AND_PASSWORD_MANDATORY ("121","Email and password is required");
+
 
 
     private String statusCode;
