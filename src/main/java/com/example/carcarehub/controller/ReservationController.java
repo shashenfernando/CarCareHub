@@ -16,7 +16,7 @@ public class ReservationController {
 
     @Autowired
     private ReservationService reservationService;
-    @RequestMapping(method = RequestMethod.POST , value ="/createUser")
+    @RequestMapping(method = RequestMethod.POST , value ="/createReservation")
     public CarCareHubResponse createReservation(@RequestBody ReservationRequest reservationRequest) throws Exception {
 
         ReservationResponse response = reservationService.createReservation(reservationRequest);
