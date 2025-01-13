@@ -69,4 +69,22 @@ public class ReservationServiceImpl implements ReservationService{
         response.setStatus(reservation.getStatus());
         return  response;
     }
+
+    @Override
+    public ReservationResponse getReservationById(int merchantId) throws Exception {
+
+       Reservation reservation = reservationDao.findReservationById(merchantId);
+
+       if (reservation == null){
+           throw new Exception(String.valueOf(CarCareHubException.RESERVATION_NOT_FOUND));
+       }
+        ReservationResponse response = new ReservationResponse();
+        response.setId(reservation.getId());
+        response.setStatus(reservation.getStatus());
+        response.setReference(reservation.getReference());
+        response.setUserId(reservation.getUserId());
+        response.setMerchantId(reservation.getMerchantId());
+
+        return response;
+    }
 }

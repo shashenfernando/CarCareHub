@@ -7,4 +7,5 @@ import com.example.carcarehub.model.response.UserRegistrationResponse;
 
 public interface ReservationService {
    public ReservationResponse createReservation(ReservationRequest reservationRequest) throws Exception;
+  public ReservationResponse getReservationById(int merchantId) throws Exception;
 }

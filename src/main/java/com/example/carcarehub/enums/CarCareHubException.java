@@ -23,7 +23,8 @@ public enum CarCareHubException {
     THIS_NIC_NUMBER_ALREADY_EXIST ("119","This nic number already exists"),
     THIS_MOBILE_NUMBER_ALREADY_EXIST ("120","This mobile number already exists"),
     SERVICE_TYPE_NOT_FOUND ( "121","This service type not found"),
-    EMAIL_AND_PASSWORD_MANDATORY ("121","Email and password is required");
+    EMAIL_AND_PASSWORD_MANDATORY ("121","Email and password is required"),
+    RESERVATION_NOT_FOUND("123","Reservation details not found");
 
 
 

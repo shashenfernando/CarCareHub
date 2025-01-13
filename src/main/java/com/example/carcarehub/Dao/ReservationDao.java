@@ -6,4 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 public interface ReservationDao {
     @Transactional
     Reservation createReservation(Reservation reservation);
+
+    Reservation findReservationById(int id);
 }
