@@ -1,17 +1,16 @@
 package com.example.carcarehub.service;
 
+import com.example.carcarehub.Dao.MerchantDao;
 import com.example.carcarehub.Dao.UserCredentialDao;
 import com.example.carcarehub.Dao.UserDao;
+import com.example.carcarehub.domain.Merchant;
 import com.example.carcarehub.domain.User;
 import com.example.carcarehub.domain.UserCredential;
 import com.example.carcarehub.enums.CarCareHubException;
 import com.example.carcarehub.enums.Status;
 import com.example.carcarehub.model.request.UpdateUser;
 import com.example.carcarehub.model.request.UserRegistrationRequest;
-import com.example.carcarehub.model.response.CarCareHubUserListResponse;
-import com.example.carcarehub.model.response.UpdateUserResponse;
-import com.example.carcarehub.model.response.UserRegistrationResponse;
-import com.example.carcarehub.model.response.UserResponse;
+import com.example.carcarehub.model.response.*;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -34,6 +33,9 @@ public class UserServiceImpl implements UserService {
     public UserDao userDao;
     @Autowired
     public UserCredentialDao userCredentialDao;
+    @Autowired
+    private MerchantDao merchantDao;
+
 
     @Override
     public UserRegistrationResponse createUser(UserRegistrationRequest userRegistrationRequest) throws Exception {
@@ -223,6 +225,23 @@ public class UserServiceImpl implements UserService {
             hashMap.put("message", "An error occurred while deleting the user: " + e.getMessage());
         }
         return hashMap;
+    }
+    @Override
+    public ServiceStationResponse findStation(int stationId) throws Exception {
+
+        Merchant merchant = merchantDao.findMerchantById(stationId);
+
+        if (merchant == null){
+            throw new Exception(String.valueOf(CarCareHubException.MERCHANT_NOT_FOUND));
+        }
+        ServiceStationResponse response = new ServiceStationResponse();
+        response.setStationId(merchant.getId());
+        response.setStationName(merchant.getStationName());
+        response.setRoad(merchant.getRoad());
+        response.setMail(merchant.getBusinessEmail());
+        response.setPhone(merchant.getBusinessMobileNumber());
+
+        return response;
     }
 
 }

@@ -77,5 +77,15 @@ public class UserController {
 
         return careHubResponse;
     }
+    @RequestMapping(method = RequestMethod.GET , value = "/{stationId}/findStation")
+    public CarCareHubResponse findStation(@PathVariable("stationId")int stationId) throws Exception{
+
+        ServiceStationResponse response = userService.findStation(stationId);
+        CarCareHubResponse careHubResponse = new CarCareHubResponse();
+        careHubResponse.setResponseCode("000");
+        careHubResponse.setResponseObject(response);
+
+        return careHubResponse;
+    }
 
 }
