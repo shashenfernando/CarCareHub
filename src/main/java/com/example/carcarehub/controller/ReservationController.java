@@ -26,7 +26,7 @@ public class ReservationController {
 
     }
     @RequestMapping(method = RequestMethod.GET , value = "/{merchantId}/getCarCareHubUser")
-    public CarCareHubResponse getUserById(@PathVariable("merchantId")int merchantId) throws Exception{
+    public CarCareHubResponse getReservationById(@PathVariable("merchantId")int merchantId) throws Exception{
 
         ReservationResponse response = reservationService.getReservationById(merchantId);
         CarCareHubResponse careHubResponse = new CarCareHubResponse();
