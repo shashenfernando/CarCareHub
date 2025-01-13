@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/admin")
+@RequestMapping(value = "/api/v1/admin")
 public class AdminController {
 
     @Autowired
