@@ -15,6 +15,8 @@ import com.example.carcarehub.model.response.UserRegistrationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 @Service
@@ -71,9 +73,9 @@ public class ReservationServiceImpl implements ReservationService{
     }
 
     @Override
-    public ReservationResponse getReservationById(int merchantId) throws Exception {
+    public ReservationResponse getReservationById(int reservationId) throws Exception {
 
-       Reservation reservation = reservationDao.findReservationById(merchantId);
+       Reservation reservation = reservationDao.findReservationById(reservationId);
 
        if (reservation == null){
            throw new Exception(String.valueOf(CarCareHubException.RESERVATION_NOT_FOUND));
@@ -86,5 +88,36 @@ public class ReservationServiceImpl implements ReservationService{
         response.setMerchantId(reservation.getMerchantId());
 
         return response;
+    }
+
+    @Override
+    public List<ReservationResponse> getPendingReservation(int merchantId) throws Exception {
+
+        Merchant merchant = merchantDao.findMerchantById(merchantId);
+
+        if (merchant == null){
+            throw new Exception(String.valueOf(CarCareHubException.MERCHANT_NOT_FOUND));
+        }
+
+        List<ReservationResponse> reservationResponses = new ArrayList<>();
+
+        List<Reservation> reservation = reservationDao.getReservationsById(merchantId);
+
+        if (reservation !=null){
+
+            for (Reservation reservation1 :reservation){
+                ReservationResponse reservationResponse = new ReservationResponse();
+                reservationResponse.setId(reservation1.getId());
+                reservationResponse.setUserId(reservation1.getUserId());
+                reservationResponse.setUserMobile(reservation1.getUserMobile());
+                reservationResponse.setUserEmail(reservation1.getUserEmail());
+                reservationResponse.setReference(reservation1.getReference());
+                reservationResponse.setReservationDate(reservation1.getReservationDate());
+                reservationResponse.setReservationTime(reservation1.getReservationTime());
+                reservationResponses.add(reservationResponse);
+
+            }
+        }
+        return reservationResponses;
     }
 }
