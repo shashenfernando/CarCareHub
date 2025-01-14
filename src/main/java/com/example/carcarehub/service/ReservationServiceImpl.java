@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -119,5 +120,33 @@ public class ReservationServiceImpl implements ReservationService{
             }
         }
         return reservationResponses;
+    }
+
+    @Override
+    public HashMap<String, Object> acceptReservation(int merchantId, int reservationId) throws Exception {
+
+       Merchant merchant = merchantDao.findMerchantById(merchantId);
+
+       if (merchant == null){
+           throw new Exception(String.valueOf(CarCareHubException.MERCHANT_NOT_FOUND));
+       }
+       Reservation reservation = reservationDao.findReservationById(reservationId);
+
+        HashMap<String, Object> hm = new HashMap<String, Object>();
+
+       if (reservation == null){
+           throw new Exception(String.valueOf(CarCareHubException.RESERVATION_NOT_FOUND));
+       }
+       if (reservation.getStatus().equalsIgnoreCase(Status.PENDING_STATUS.getStatus())){
+           reservation.setStatus(Status.ACCEPT_STATUS.getStatus());
+       }
+       if (!reservation.getStatus().equalsIgnoreCase(Status.ACCEPT_STATUS.getStatus())){
+           hm.put("status", "success");
+           hm.put("message", "Reservation Acceptance un-successful");
+       }else {
+           hm.put("status", "success");
+           hm.put("message", "Reservation Acceptance successful");
+       }
+        return hm;
     }
 }

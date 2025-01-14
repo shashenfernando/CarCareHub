@@ -3,7 +3,8 @@ package com.example.carcarehub.enums;
 public enum Status {
     PENDING_STATUS("P","PENDING"),
     APPROVED_STATUS("A","APPROVED"),
-    DECLINED_STATUS("D","DECLINED"),;
+    DECLINED_STATUS("D","DECLINED"),
+    ACCEPT_STATUS("AC","ACCEPT");
 
 
     private String status;

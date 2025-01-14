@@ -8,6 +8,7 @@ import com.example.carcarehub.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -44,6 +45,16 @@ public class ReservationController {
         CarCareHubResponse careHubResponse = new CarCareHubResponse();
         careHubResponse.setResponseCode("000");
         careHubResponse.setResponseObject(getPendingReservation);
+
+        return careHubResponse;
+    }
+    @RequestMapping(method = RequestMethod.PUT,value = "/{merchantId}/acceptReservation/{reservationId}")
+    public CarCareHubResponse acceptReservation(@PathVariable("merchantId") int merchantId,@PathVariable("reservationId")int reservationId) throws Exception{
+
+        HashMap<String, Object> responseHashMap = reservationService.acceptReservation(merchantId,reservationId);
+        CarCareHubResponse careHubResponse = new CarCareHubResponse();
+        careHubResponse.setResponseCode("000");
+        careHubResponse.setResponseObject(responseHashMap);
 
         return careHubResponse;
     }
