@@ -3,6 +3,8 @@ package com.example.carcarehub.model.response;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.time.LocalDateTime;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ReservationResponse {
 
@@ -18,7 +20,7 @@ public class ReservationResponse {
     private String reservationDate;
     private String reservationTime;
     private String status;
-    private String createDate;
+    private LocalDateTime createDate;
     private String reference;
 
     public int getId() {
@@ -117,11 +119,11 @@ public class ReservationResponse {
         this.status = status;
     }
 
-    public String getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(String createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 

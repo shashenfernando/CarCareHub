@@ -2,6 +2,9 @@ package com.example.carcarehub.domain;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 @Entity
 @Table(name = "reservation")
 public class Reservation {
@@ -31,7 +34,7 @@ public class Reservation {
 
     private String status;
     @Column(name = "create_date")
-    private String createDate;
+    private LocalDateTime createDate;
 
     private String reference;
 
@@ -139,11 +142,11 @@ public class Reservation {
         this.status = status;
     }
 
-    public String getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(String createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 }

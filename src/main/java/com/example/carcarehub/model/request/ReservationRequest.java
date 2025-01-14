@@ -11,6 +11,8 @@ public class ReservationRequest {
     private String stationName;
     private String merchantMobileNo;
     private String merchantEmail;
+    private String reservationDate;
+    private String reservationTime;
 
     public int getUserId() {
         return userId;
@@ -66,5 +68,21 @@ public class ReservationRequest {
 
     public void setMerchantEmail(String merchantEmail) {
         this.merchantEmail = merchantEmail;
+    }
+
+    public String getReservationDate() {
+        return reservationDate;
+    }
+
+    public void setReservationDate(String reservationDate) {
+        this.reservationDate = reservationDate;
+    }
+
+    public String getReservationTime() {
+        return reservationTime;
+    }
+
+    public void setReservationTime(String reservationTime) {
+        this.reservationTime = reservationTime;
     }
 }

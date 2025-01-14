@@ -38,7 +38,7 @@ public class ReservationController {
 
         return careHubResponse;
     }
-    @RequestMapping(method = RequestMethod.POST, value = "/{merchantId}/getPendingReservation")
+    @RequestMapping(method = RequestMethod.GET, value = "/{merchantId}/getPendingReservation")
     public CarCareHubResponse getPendingReservation(@PathVariable("merchantId")int merchantId) throws Exception{
 
         List<ReservationResponse> getPendingReservation = reservationService.getPendingReservation(merchantId);

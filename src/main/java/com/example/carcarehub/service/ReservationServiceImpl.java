@@ -15,6 +15,7 @@ import com.example.carcarehub.model.response.UserRegistrationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,10 +45,10 @@ public class ReservationServiceImpl implements ReservationService{
         }
         Random random = new Random();
         String reference = String.format("%04d", random.nextInt(9999));
-        reference = reference+"car-care-hub";
+        reference = "CARCAREHUB"+reference;
 
         Reservation reservation = new Reservation();
-        reservation.setUserId(reservation.getUserId());
+        reservation.setUserId(user.getId());
         reservation.setUserEmail(reservationRequest.getUserEmail());
         reservation.setUserMobile(reservationRequest.getUserMobileNo());
         reservation.setReference(reference);
@@ -56,6 +57,9 @@ public class ReservationServiceImpl implements ReservationService{
         reservation.setMerchantMobile(reservationRequest.getMerchantMobileNo());
         reservation.setStationName(reservationRequest.getStationName());
         reservation.setStatus(Status.PENDING_STATUS.getStatus());
+        reservation.setReservationDate(reservationRequest.getReservationDate());
+        reservation.setReservationTime(reservationRequest.getReservationTime());
+        reservation.setCreateDate(LocalDateTime.now());
 
         reservationDao.createReservation(reservation);
 
@@ -64,12 +68,15 @@ public class ReservationServiceImpl implements ReservationService{
         response.setMerchantId(reservation.getMerchantId());
         response.setStationName(reservation.getStationName());
         response.setMerchantMobile(reservation.getMerchantMobile());
-        response.setMerchantMobile(reservation.getMerchantMobile());
+        response.setMerchantEmail(reservation.getMerchantEmail());
         response.setUserId(reservation.getUserId());
         response.setUserEmail(reservation.getUserEmail());
         response.setUserMobile(reservation.getUserMobile());
         response.setReference(reservation.getReference());
         response.setStatus(reservation.getStatus());
+        response.setReservationTime(reservation.getReservationTime());
+        response.setReservationDate(reservation.getReservationDate());
+        response.setCreateDate(reservation.getCreateDate());
         return  response;
     }
 

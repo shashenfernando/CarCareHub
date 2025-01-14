@@ -73,7 +73,7 @@ public class ReservationDaoImpl implements ReservationDao{
             Root<Reservation> reservationRoot = query.from(Reservation.class);
 
             query.select(reservationRoot).where(cb.equal(reservationRoot.get("merchantId"), merchantId),
-                    cb.equal(reservationRoot.get("is_active"), "A"));
+                    cb.equal(reservationRoot.get("status"), "P"));
 
             TypedQuery<Reservation> typedQuery = em.createQuery(query);
             return typedQuery.getResultList();
