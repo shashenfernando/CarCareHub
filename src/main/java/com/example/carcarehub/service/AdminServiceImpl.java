@@ -5,6 +5,7 @@ import com.example.carcarehub.Dao.AdminDao;
 import com.example.carcarehub.domain.Admin;
 import com.example.carcarehub.domain.AdminCredential;
 import com.example.carcarehub.enums.CarCareHubException;
+import com.example.carcarehub.exception.AppException;
 import com.example.carcarehub.model.request.AdminAddRequest;
 import com.example.carcarehub.model.request.AdminUpdateRequest;
 import com.example.carcarehub.model.response.AdminResponse;
@@ -122,22 +123,22 @@ public class AdminServiceImpl implements AdminService{
 
         AdminCredential adminCredential1 = adminCredentialDao.findAdminByUserName(adminAddRequest.getUserName());
         if(adminCredential1 != null){
-            throw new Exception(String.valueOf(CarCareHubException.THIS_USER_NAME_ALREADY_EXIST));
+            throw new AppException(CarCareHubException.THIS_USER_NAME_ALREADY_EXIST);
         }
 
         Admin admin1 = adminDao.findAdminByNicNumber(adminAddRequest.getNic());
         if(admin1 != null){
-            throw new Exception(String.valueOf(CarCareHubException.THIS_NIC_NUMBER_ALREADY_EXIST));
+            throw new AppException(CarCareHubException.THIS_NIC_NUMBER_ALREADY_EXIST);
         }
 
         Admin admin3 = adminDao.findAdminByMobileNumber(adminAddRequest.getMobileNumber());
         if(admin3 != null){
-            throw new Exception(String.valueOf(CarCareHubException.THIS_MOBILE_NUMBER_ALREADY_EXIST));
+            throw new AppException(CarCareHubException.THIS_MOBILE_NUMBER_ALREADY_EXIST);
         }
 
         Admin admin4 = adminDao.findAdminByEmail(adminAddRequest.getEmail());
         if(admin4 != null){
-            throw new Exception(String.valueOf(CarCareHubException.THIS_EMAIL_ALREADY_EXIST));
+            throw new AppException(CarCareHubException.THIS_EMAIL_ALREADY_EXIST);
         }
 
         Admin admin = new Admin();
@@ -195,7 +196,7 @@ public class AdminServiceImpl implements AdminService{
             adminResponse.setProfilePicture(admin.getProfilePicture());
             return adminResponse;
         }else {
-            throw new Exception(String.valueOf(CarCareHubException.ADMIN_NOT_FOUND));
+            throw new AppException(CarCareHubException.ADMIN_NOT_FOUND);
         }
     }
 

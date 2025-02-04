@@ -6,7 +6,7 @@ import com.example.carcarehub.domain.Merchant;
 import com.example.carcarehub.domain.MerchantCredential;
 import com.example.carcarehub.enums.Status;
 import com.example.carcarehub.enums.CarCareHubException;
-import com.example.carcarehub.exception.CarCareHubException2;
+import com.example.carcarehub.exception.AppException;
 import com.example.carcarehub.model.request.MerchantRequest;
 import com.example.carcarehub.utill.MerchantEncryption;
 import org.mindrot.jbcrypt.BCrypt;
@@ -46,10 +46,10 @@ public class MerchantServiceImpl implements MerchantService {
         MerchantCredential isCredentialEixt = merchantCredentialDao.findByUserName(merchantRequest.getUserName());
 
         if (isMerchantExist != null) {
-            throw new CarCareHubException2(CarCareHubException.EXISTING_MERCHANT_NAME);
+            throw new AppException(CarCareHubException.EXISTING_MERCHANT_NAME);
         }
         if (isCredentialEixt !=null){
-            throw new CarCareHubException2(CarCareHubException.EXISTING_USER_NAME);
+            throw new AppException(CarCareHubException.EXISTING_USER_NAME);
         }
         try {
 
@@ -65,7 +65,13 @@ public class MerchantServiceImpl implements MerchantService {
             merchant.setStatus(Status.PENDING_STATUS.getStatus());
             Date date = new Date();
             merchant.setRegisteredDate(date);
+            int dailyCount = merchantRequest.getDailyReservationLimit();
 
+            if (dailyCount == 0){
+                dailyCount = 6;
+            }
+
+            merchant.setDailyReservationLimit(dailyCount);
             merchant = merchantDao.registerMerchant(merchant);
 
             if (merchant != null) {
@@ -84,11 +90,11 @@ public class MerchantServiceImpl implements MerchantService {
                 if (merchantCredential != null) {
                     return merchant;
                 } else {
-                    throw new CarCareHubException2(CarCareHubException.UNKNOWN_ERROR_OCCURED);
+                    throw new AppException(CarCareHubException.UNKNOWN_ERROR_OCCURED);
                 }
 
             } else {
-                throw new CarCareHubException2(CarCareHubException.UNKNOWN_ERROR_OCCURED);
+                throw new AppException(CarCareHubException.UNKNOWN_ERROR_OCCURED);
             }
 
         } catch (Exception e) {
@@ -121,7 +127,7 @@ public class MerchantServiceImpl implements MerchantService {
                 return null;
             }
         }else {
-            throw new Exception(String.valueOf(CarCareHubException.MISSING_SOME_PARAMETERS));
+            throw new AppException(CarCareHubException.MISSING_SOME_PARAMETERS);
         }
     }
 

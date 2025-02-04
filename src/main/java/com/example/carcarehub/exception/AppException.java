@@ -2,17 +2,17 @@ package com.example.carcarehub.exception;
 
 import com.example.carcarehub.enums.CarCareHubException;
 
-public class CarCareHubException2 extends RuntimeException {
+public class AppException extends RuntimeException {
 
     private String errorCode;
     private String errorMessage;
 
-    public CarCareHubException2 (CarCareHubException applicationError) {
+    public AppException(CarCareHubException applicationError) {
         this.errorCode = applicationError.statusCode();
-        this.errorMessage = applicationError.stausMessage();
+        this.errorMessage = applicationError.statusMessage();
     }
 
-    public CarCareHubException2(String errorCode, String errorMessage) {
+    public AppException(String errorCode, String errorMessage) {
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
     }

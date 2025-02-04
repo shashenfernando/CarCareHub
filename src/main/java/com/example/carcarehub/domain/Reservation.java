@@ -37,6 +37,11 @@ public class Reservation {
     private LocalDateTime createDate;
 
     private String reference;
+    @Column(name = "service_type")
+    private String serviceType;
+    @Column(name = "vehicle_type")
+    private String vehicleType;
+
 
     public String getReference() {
         return reference;
@@ -149,4 +154,21 @@ public class Reservation {
     public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
+
+    public String getServiceType() {
+        return serviceType;
+    }
+
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
+    }
+
+    public String getVehicleType() {
+        return vehicleType;
+    }
+
+    public void setVehicleType(String vehicleType) {
+        this.vehicleType = vehicleType;
+    }
+
 }

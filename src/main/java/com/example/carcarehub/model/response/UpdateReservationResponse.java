@@ -1,9 +1,9 @@
-package com.example.carcarehub.model.request;
+package com.example.carcarehub.model.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ReservationRequest {
+public class UpdateReservationResponse {
     private int userId;
     private String userMobileNo;
     private String userEmail;

@@ -24,7 +24,8 @@ public enum CarCareHubException {
     THIS_MOBILE_NUMBER_ALREADY_EXIST ("120","This mobile number already exists"),
     SERVICE_TYPE_NOT_FOUND ( "121","This service type not found"),
     EMAIL_AND_PASSWORD_MANDATORY ("121","Email and password is required"),
-    RESERVATION_NOT_FOUND("123","Reservation details not found");
+    RESERVATION_NOT_FOUND("123","Reservation details not found"),
+    RESERVATION_COUNT_EXCEEDED("124","Daily reservation count is exceeded , sorry for the inconvinence");
 
 
 
@@ -35,13 +36,22 @@ public enum CarCareHubException {
         this.statusCode = statusCode;
         this.statusMessage = statusMessage;
     }
+
+    public String getStatusCode() {
+        return statusCode;
+    }
+
+    public String getStatusMessage() {
+        return statusMessage;
+    }
+
     public String statusCode(){
         return statusCode;
     }
 
-    public String stausMessage(){
+    public String statusMessage(){
         return statusMessage;
     }
-    }
+}
 
 

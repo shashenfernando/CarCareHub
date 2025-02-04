@@ -51,7 +51,8 @@ public class Merchant implements Serializable {
 
     @Column(name = "status", nullable = false)
     private String status = "I";
-
+    @Column(name = "daaily_reservation_limit")
+    private int dailyReservationLimit;
 
     public int getId() {
         return id;
@@ -174,5 +175,11 @@ public class Merchant implements Serializable {
         this.status = status;
     }
 
+    public int getDailyReservationLimit() {
+        return dailyReservationLimit;
+    }
 
+    public void setDailyReservationLimit(int dailyReservationLimit) {
+        this.dailyReservationLimit = dailyReservationLimit;
+    }
 }

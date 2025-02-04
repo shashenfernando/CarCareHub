@@ -6,6 +6,7 @@ import com.example.carcarehub.domain.ServiceType;
 import com.example.carcarehub.domain.VehicleType;
 import com.example.carcarehub.enums.CarCareHubException;
 import com.example.carcarehub.enums.Status;
+import com.example.carcarehub.exception.AppException;
 import com.example.carcarehub.model.request.ServiceTypeRegisterRequest;
 import com.example.carcarehub.model.response.ServiceTypeListResponse;
 import com.example.carcarehub.model.response.ServiceTypeResponse;
@@ -67,7 +68,7 @@ public class ServiceTypeServiceImpl implements ServiceTypeService {
         response.setStatus(serviceType.getStatus());
 
         if (response != null){
-            throw new Exception(String.valueOf(CarCareHubException.DATA_NOT_FOUND));
+            throw new AppException(CarCareHubException.DATA_NOT_FOUND);
         }
         return response;
 

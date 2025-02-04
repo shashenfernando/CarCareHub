@@ -1,9 +1,8 @@
 package com.example.carcarehub.controller;
 
 import com.example.carcarehub.model.request.ReservationRequest;
-import com.example.carcarehub.model.response.CarCareHubResponse;
-import com.example.carcarehub.model.response.ReservationResponse;
-import com.example.carcarehub.model.response.UserResponse;
+import com.example.carcarehub.model.request.UpdateReservationRequest;
+import com.example.carcarehub.model.response.*;
 import com.example.carcarehub.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -58,5 +57,47 @@ public class ReservationController {
 
         return careHubResponse;
     }
+    @RequestMapping(method = RequestMethod.PUT,value = "/{reservationId}/updateStatus/{merchantId}")
+    public CarCareHubResponse updateStatus(@PathVariable("reservationId") int reservationId, @PathVariable("merchantId")int merchantId,@RequestParam(value = "status",required = false)String status) throws Exception{
 
+        ReservationStatusUpdate response = reservationService.updateStatus(reservationId,merchantId,status);
+        CarCareHubResponse careHubResponse = new CarCareHubResponse();
+        careHubResponse.setResponseCode("000");
+        careHubResponse.setResponseObject(response);
+
+        return careHubResponse;
+    }
+
+    @RequestMapping(method = RequestMethod.POST,value = "/{reservationId}/delete/reservation")
+    public CarCareHubResponse deleteReservation(@PathVariable("reservationId")int reservationId) throws Exception{
+
+        HashMap<String,Object> response = reservationService.deleteReservation(reservationId);
+        CarCareHubResponse careHubResponse = new CarCareHubResponse();
+        careHubResponse.setResponseCode("000");
+        careHubResponse.setResponseObject(response);
+
+        return careHubResponse;
+    }
+
+    @RequestMapping(method = RequestMethod.PUT,value = "/{reservationId}/update/reservation")
+    public CarCareHubResponse updateReservation(@PathVariable("reservationId") int reservationId , @RequestBody UpdateReservationRequest updateReservationRequest) throws Exception{
+
+        UpdateReservationResponse response = reservationService.updateReservation(reservationId, updateReservationRequest);
+        CarCareHubResponse careHubResponse = new CarCareHubResponse();
+        careHubResponse.setResponseCode("000");
+        careHubResponse.setResponseObject(response);
+
+        return careHubResponse;
+    }
+
+    @RequestMapping(method = RequestMethod.GET,value = "/{reservationId}/findReservationStatus")
+    private CarCareHubResponse getReservationStatus(@PathVariable("reservationId") int reservationId) throws Exception{
+
+        ReservationStatusResponse response = reservationService.getReservationStatus(reservationId);
+        CarCareHubResponse careHubResponse = new CarCareHubResponse();
+        careHubResponse.setResponseCode("000");
+        careHubResponse.setResponseObject(response);
+
+        return careHubResponse;
+    }
 }

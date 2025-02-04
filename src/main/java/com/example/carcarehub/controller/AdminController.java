@@ -2,6 +2,7 @@ package com.example.carcarehub.controller;
 
 import com.example.carcarehub.domain.Admin;
 import com.example.carcarehub.enums.CarCareHubException;
+import com.example.carcarehub.exception.AppException;
 import com.example.carcarehub.model.request.AdminAddRequest;
 import com.example.carcarehub.model.request.AdminUpdateRequest;
 import com.example.carcarehub.model.response.AdminResponse;
@@ -34,7 +35,7 @@ public class AdminController {
         if (response.getResponseObject() != null){
             return response;
         }else{
-            throw new Exception(String.valueOf(CarCareHubException.ADMIN_NOT_FOUND));
+            throw new AppException(CarCareHubException.ADMIN_NOT_FOUND);
         }
     }
 
@@ -53,7 +54,7 @@ public class AdminController {
             response.setResponseObject(optionalAdmin);
             return response;
         }else{
-            throw new Exception(String.valueOf(CarCareHubException.ADMIN_NOT_FOUND));
+            throw new AppException(CarCareHubException.ADMIN_NOT_FOUND);
         }
     }
 
@@ -72,7 +73,7 @@ public class AdminController {
             response.setResponseObject(optionalAdmin);
             return response;
         }else{
-            throw new Exception(String.valueOf(CarCareHubException.ADMIN_NOT_FOUND));
+            throw new AppException(CarCareHubException.ADMIN_NOT_FOUND);
         }
     }
 
@@ -91,7 +92,7 @@ public class AdminController {
             response.setResponseObject(optionalAdmin);
             return response;
         }else{
-            throw new Exception(String.valueOf(CarCareHubException.ADMIN_NOT_FOUND));
+            throw new AppException(CarCareHubException.ADMIN_NOT_FOUND);
         }
     }
 
@@ -129,7 +130,7 @@ public class AdminController {
             response.setResponseObject(adminResponse);
             return response;
         }
-        throw new Exception(String.valueOf(CarCareHubException.ADMIN_NOT_FOUND));
+        throw new AppException(CarCareHubException.ADMIN_NOT_FOUND);
     }
 
 }

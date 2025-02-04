@@ -8,6 +8,7 @@ import com.example.carcarehub.domain.User;
 import com.example.carcarehub.domain.UserCredential;
 import com.example.carcarehub.enums.CarCareHubException;
 import com.example.carcarehub.enums.Status;
+import com.example.carcarehub.exception.AppException;
 import com.example.carcarehub.model.request.UpdateUser;
 import com.example.carcarehub.model.request.UserRegistrationRequest;
 import com.example.carcarehub.model.response.*;
@@ -65,7 +66,7 @@ public class UserServiceImpl implements UserService {
         User existingUser = userDao.findUserByEmail(user.getEmail());
 
         if (existingUser != null){
-            throw new Exception(String.valueOf(CarCareHubException.THIS_EMAIL_ALREADY_EXIST));
+            throw new AppException(CarCareHubException.THIS_EMAIL_ALREADY_EXIST);
         }
 
         String hashedPassword = hashedPassword(userCredential.getPassword());
@@ -119,7 +120,7 @@ public class UserServiceImpl implements UserService {
         UserCredential credential = new UserCredential();
 
         if (user == null){
-            throw new Exception(String.valueOf(CarCareHubException.USER_NOT_FOUND));
+            throw new AppException(CarCareHubException.USER_NOT_FOUND);
         }
 
         UserResponse response = new UserResponse();
@@ -160,7 +161,7 @@ public class UserServiceImpl implements UserService {
       }
 
       if (responses == null){
-          throw new Exception(String.valueOf(CarCareHubException.NO_USERS_DATA_FOUND));
+          throw new AppException(CarCareHubException.NO_USERS_DATA_FOUND);
       }
       else {
           return responses;
@@ -174,7 +175,7 @@ public class UserServiceImpl implements UserService {
         User user = userDao.findUserById(userId);
 
         if (user == null){
-            throw new Exception(String.valueOf(CarCareHubException.USER_NOT_FOUND));
+            throw new AppException(CarCareHubException.USER_NOT_FOUND);
         }
         user.setFirstName(updateUser.getFirstName());
         user.setLastName(updateUser.getLastName());
@@ -199,7 +200,7 @@ public class UserServiceImpl implements UserService {
             return response;
         }
         else {
-            throw new Exception(String.valueOf(CarCareHubException.UNKNOWN_ERROR_OCCURED));
+            throw new AppException(CarCareHubException.UNKNOWN_ERROR_OCCURED);
         }
     }
 
@@ -212,7 +213,7 @@ public class UserServiceImpl implements UserService {
 
 
         if (user == null){
-            throw new Exception(String.valueOf(CarCareHubException.USER_NOT_FOUND));
+            throw new AppException(CarCareHubException.USER_NOT_FOUND);
         }
         try {
             userCredentialDao.deleteUserCredentials(user);
@@ -232,7 +233,7 @@ public class UserServiceImpl implements UserService {
         Merchant merchant = merchantDao.findMerchantById(stationId);
 
         if (merchant == null){
-            throw new Exception(String.valueOf(CarCareHubException.MERCHANT_NOT_FOUND));
+            throw new AppException(CarCareHubException.MERCHANT_NOT_FOUND);
         }
         ServiceStationResponse response = new ServiceStationResponse();
         response.setStationId(merchant.getId());

@@ -19,7 +19,7 @@ public class MerchantRequest {
     private String latitude;
     private String openTime;
     private String closeTime;
-
+    private int dailyReservationLimit;
 
     public String getStationName() {
         return stationName;
@@ -140,5 +140,13 @@ public class MerchantRequest {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getDailyReservationLimit() {
+        return dailyReservationLimit;
+    }
+
+    public void setDailyReservationLimit(int dailyReservationLimit) {
+        this.dailyReservationLimit = dailyReservationLimit;
     }
 }
