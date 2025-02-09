@@ -36,6 +36,8 @@ public class User implements Serializable {
     private String road;
     @Column(name = "email" ,nullable = false, length = 255)
     private String email;
+    @Column(name = "status")
+    private String status;
     @OneToMany(mappedBy = "user")
     private List<UserCredential> userCredentials;
 
@@ -133,6 +135,14 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public List<UserCredential> getUserCredentials() {

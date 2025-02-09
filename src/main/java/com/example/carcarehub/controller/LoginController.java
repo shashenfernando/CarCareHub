@@ -1,13 +1,11 @@
 package com.example.carcarehub.controller;
 
 import com.example.carcarehub.model.request.LoginRequest;
+import com.example.carcarehub.model.request.resetPasswordResetRequest;
 import com.example.carcarehub.model.response.CarCareHubResponse;
 import com.example.carcarehub.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 
@@ -31,5 +29,17 @@ public class LoginController {
         careHubResponse.setResponseObject(responseHashMap);
 
         return careHubResponse;
+    }
+
+    @RequestMapping(method = RequestMethod.POST,value = "/resetPassword/{userId}")
+    public CarCareHubResponse resetPasswordReset(@PathVariable("userId") int userId ,@RequestBody resetPasswordResetRequest request)throws Exception{
+
+        HashMap<String, Object> responseHashMap = loginService.resetPasswordReset(userId,request);
+        CarCareHubResponse careHubResponse = new CarCareHubResponse();
+        careHubResponse.setResponseCode("000");
+        careHubResponse.setResponseObject(responseHashMap);
+
+        return careHubResponse;
+
     }
 }

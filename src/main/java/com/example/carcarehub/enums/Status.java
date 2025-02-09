@@ -10,7 +10,8 @@ public enum Status {
     CANCELED("C","CANCELED"),
     RESCHEDULED("RS","RESCHEDULED"),
     ON_HOLD("OH","ON HOLD"),
-    READY_FOR_PICKUP("RP","READY FOR PICKUP");
+    READY_FOR_PICKUP("RP","READY FOR PICKUP"),
+    LOCKED("L","LOCKED");
 
 
     private String status;

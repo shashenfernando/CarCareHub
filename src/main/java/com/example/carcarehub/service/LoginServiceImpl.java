@@ -2,18 +2,22 @@ package com.example.carcarehub.service;
 
 import com.example.carcarehub.Dao.AdminDao;
 import com.example.carcarehub.Dao.MerchantDao;
+import com.example.carcarehub.Dao.UserCredentialDao;
 import com.example.carcarehub.Dao.UserDao;
 import com.example.carcarehub.Repository.AdminCredentialRepo;
 import com.example.carcarehub.Repository.MerchantCredentialRepo;
 import com.example.carcarehub.Repository.UserCredentialRepo;
 import com.example.carcarehub.domain.*;
 import com.example.carcarehub.enums.CarCareHubException;
+import com.example.carcarehub.enums.Status;
 import com.example.carcarehub.exception.AppException;
+import com.example.carcarehub.model.request.resetPasswordResetRequest;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.Random;
 
 @Service
 public class LoginServiceImpl implements LoginService{
@@ -29,6 +33,9 @@ public class LoginServiceImpl implements LoginService{
     private MerchantCredentialRepo merchantCredentialRepo;
     @Autowired
     AdminCredentialRepo adminCredentialRepo;
+    @Autowired
+    private EmailSenderService emailSenderService;
+
     @Override
     public HashMap<String, Object> loginApplication(String email, String password, String role) throws Exception {
 
@@ -108,5 +115,33 @@ public class LoginServiceImpl implements LoginService{
             }
             return hm;
         }
+
+    @Override
+    public HashMap<String, Object> resetPasswordReset(int userId, resetPasswordResetRequest request) throws Exception {
+
+       User user = userDao.findUserById(userId);
+       UserCredential credential = userCredentialRepo.findById(userId);
+       if (user == null){
+           throw new AppException(CarCareHubException.USER_NOT_FOUND);
+       }
+       Random random = new Random();
+       String otp = String.format("%04d", random.nextInt(9999));
+
+        HashMap<String, Object> hm = new HashMap<String, Object>();
+
+        String userEmail = user.getEmail();
+        String from = null;
+        String subject = null;
+        String body = null;
+
+        subject = "Reset Password OTP";
+        body = "Dear Customer,\n\n your please use this OTP"+otp +" for reset your password";
+        emailSenderService.sendEmail(userEmail,from,subject,body);
+
+        hm.put("status","true");
+        hm.put("message", "Verification code successfully sent to your email. Use it to change the password");
+
+        return hm;
+    }
 
 }
