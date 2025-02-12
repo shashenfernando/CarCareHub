@@ -13,4 +13,5 @@ public interface ReservationDao {
 
     Reservation findReservationByMerchantId(int merchantId);
     public List<Reservation>getReservationsById(int merchantId);
+   public List<Reservation> findReservationsById(int merchantId);
 }

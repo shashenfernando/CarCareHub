@@ -91,7 +91,7 @@ public class ReservationController {
     }
 
     @RequestMapping(method = RequestMethod.GET,value = "/{reservationId}/findReservationStatus")
-    private CarCareHubResponse getReservationStatus(@PathVariable("reservationId") int reservationId) throws Exception{
+    public CarCareHubResponse getReservationStatus(@PathVariable("reservationId") int reservationId) throws Exception{
 
         ReservationStatusResponse response = reservationService.getReservationStatus(reservationId);
         CarCareHubResponse careHubResponse = new CarCareHubResponse();
@@ -99,5 +99,15 @@ public class ReservationController {
         careHubResponse.setResponseObject(response);
 
         return careHubResponse;
+    }
+    @RequestMapping(method = RequestMethod.GET,value = "/{merchantUserId}/getAllReservations")
+    public CarCareHubResponse getAllReservations(@PathVariable("merchantUserId")int merchantUserId)throws Exception{
+
+        List<ReservationResponse> getAllReservations = reservationService.getAllReservations(merchantUserId);
+        CarCareHubResponse response = new CarCareHubResponse();
+        response.setResponseCode("000");
+        response.setResponseObject(getAllReservations);
+
+        return response;
     }
 }

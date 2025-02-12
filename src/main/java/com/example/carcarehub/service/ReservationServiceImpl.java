@@ -320,4 +320,35 @@ public class ReservationServiceImpl implements ReservationService{
 
         return response;
     }
+
+    @Override
+    public List<ReservationResponse> getAllReservations(int merchantUserId) throws Exception {
+
+        Merchant merchant = merchantDao.findMerchantById(merchantUserId);
+
+        if (merchant == null){
+            throw new AppException(CarCareHubException.MERCHANT_NOT_FOUND);
+        }
+
+        List<ReservationResponse> reservationResponses = new ArrayList<>();
+
+        List<Reservation> reservation = reservationDao.findReservationsById(merchantUserId);
+
+        if (reservation !=null){
+
+            for (Reservation reservation1 :reservation){
+                ReservationResponse reservationResponse = new ReservationResponse();
+                reservationResponse.setId(reservation1.getId());
+                reservationResponse.setUserId(reservation1.getUserId());
+                reservationResponse.setUserMobile(reservation1.getUserMobile());
+                reservationResponse.setUserEmail(reservation1.getUserEmail());
+                reservationResponse.setReference(reservation1.getReference());
+                reservationResponse.setReservationDate(reservation1.getReservationDate());
+                reservationResponse.setReservationTime(reservation1.getReservationTime());
+                reservationResponses.add(reservationResponse);
+
+            }
+        }
+        return reservationResponses;
+    }
 }

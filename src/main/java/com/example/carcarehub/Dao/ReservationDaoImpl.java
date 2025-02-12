@@ -1,7 +1,6 @@
 package com.example.carcarehub.Dao;
 
 import com.example.carcarehub.domain.Reservation;
-import com.example.carcarehub.enums.Status;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -74,6 +73,23 @@ public class ReservationDaoImpl implements ReservationDao{
 
             query.select(reservationRoot).where(cb.equal(reservationRoot.get("merchantId"), merchantId),
                     cb.equal(reservationRoot.get("status"), "P"));
+
+            TypedQuery<Reservation> typedQuery = em.createQuery(query);
+            return typedQuery.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<Reservation> findReservationsById(int merchantId) {
+        try {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Reservation> query = cb.createQuery(Reservation.class);
+            Root<Reservation> reservationRoot = query.from(Reservation.class);
+
+            query.select(reservationRoot).where(cb.equal(reservationRoot.get("merchantId"), merchantId));
 
             TypedQuery<Reservation> typedQuery = em.createQuery(query);
             return typedQuery.getResultList();

@@ -19,4 +19,5 @@ public interface ReservationService {
     public HashMap<String, Object> deleteReservation(int reservationId)throws Exception;
    public UpdateReservationResponse updateReservation(int reservationId, UpdateReservationRequest updateReservationRequest) throws Exception;
    public ReservationStatusResponse getReservationStatus(int reservationId) throws Exception;
+   public List<ReservationResponse> getAllReservations(int merchantUserId)throws Exception;
 }
