@@ -3,6 +3,7 @@ package com.example.carcarehub.service;
 import com.example.carcarehub.Dao.MerchantDao;
 import com.example.carcarehub.Dao.ReservationDao;
 import com.example.carcarehub.Dao.UserDao;
+import com.example.carcarehub.domain.EmergencyReservation;
 import com.example.carcarehub.domain.Merchant;
 import com.example.carcarehub.domain.Reservation;
 import com.example.carcarehub.domain.User;
@@ -373,7 +374,7 @@ public class ReservationServiceImpl implements ReservationService{
         String reference = String.format("%04d", random.nextInt(9999));
         reference = "CARCAREHUB EMERGENCY"+reference;
 
-        Reservation reservation = new Reservation();
+        EmergencyReservation reservation = new EmergencyReservation();
 
         if (dailyCount == 0){
             throw new AppException(CarCareHubException.RESERVATION_COUNT_EXCEEDED);
@@ -394,7 +395,7 @@ public class ReservationServiceImpl implements ReservationService{
         reservation.setServiceType("EMERGENCY");
         reservation.setVehicleType(reservationRequest.getVehicleType());
 
-        reservationDao.createReservation(reservation);
+        reservationDao.createEmergencyReservation(reservation);
 
         merchant.setDailyReservationLimit(merchant.getDailyReservationLimit()+1);
 

@@ -1,5 +1,6 @@
 package com.example.carcarehub.Dao;
 
+import com.example.carcarehub.domain.EmergencyReservation;
 import com.example.carcarehub.domain.Reservation;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -28,7 +29,7 @@ public class ReservationDaoImpl implements ReservationDao{
             em.persist(reservation);
             return reservation;
         } catch (Exception e) {
-            logger.error("Error registering user", e);
+            logger.error("Error create reservation", e);
             e.printStackTrace();
             return null;
         }
@@ -94,6 +95,18 @@ public class ReservationDaoImpl implements ReservationDao{
             TypedQuery<Reservation> typedQuery = em.createQuery(query);
             return typedQuery.getResultList();
         } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public EmergencyReservation createEmergencyReservation(EmergencyReservation reservation) {
+        try {
+            em.persist(reservation);
+            return reservation;
+        } catch (Exception e) {
+            logger.error("Error create emergency reservation", e);
             e.printStackTrace();
             return null;
         }
