@@ -1,5 +1,6 @@
 package com.example.carcarehub.controller;
 
+import com.example.carcarehub.model.request.EmergencyReservationRequest;
 import com.example.carcarehub.model.request.ReservationRequest;
 import com.example.carcarehub.model.request.UpdateReservationRequest;
 import com.example.carcarehub.model.response.*;
@@ -109,5 +110,16 @@ public class ReservationController {
         response.setResponseObject(getAllReservations);
 
         return response;
+    }
+    @RequestMapping(method = RequestMethod.POST , value ="/createEmergencyReservation")
+    public CarCareHubResponse createEmergencyReservation(@RequestBody EmergencyReservationRequest reservationRequest) throws Exception {
+
+        ReservationResponse response = reservationService.createEmergencyReservation(reservationRequest);
+        CarCareHubResponse careHubResponse = new CarCareHubResponse();
+        careHubResponse.setResponseCode("000");
+        careHubResponse.setResponseObject(response);
+
+        return careHubResponse;
+
     }
 }

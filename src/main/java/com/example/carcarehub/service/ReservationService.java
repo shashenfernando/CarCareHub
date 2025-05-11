@@ -1,5 +1,6 @@
 package com.example.carcarehub.service;
 
+import com.example.carcarehub.model.request.EmergencyReservationRequest;
 import com.example.carcarehub.model.request.ReservationRequest;
 import com.example.carcarehub.model.request.UpdateReservationRequest;
 import com.example.carcarehub.model.response.ReservationResponse;
@@ -20,4 +21,5 @@ public interface ReservationService {
    public UpdateReservationResponse updateReservation(int reservationId, UpdateReservationRequest updateReservationRequest) throws Exception;
    public ReservationStatusResponse getReservationStatus(int reservationId) throws Exception;
    public List<ReservationResponse> getAllReservations(int merchantUserId)throws Exception;
+   public ReservationResponse createEmergencyReservation(EmergencyReservationRequest reservationRequest) throws Exception;
 }

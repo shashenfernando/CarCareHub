@@ -9,6 +9,7 @@ import com.example.carcarehub.domain.User;
 import com.example.carcarehub.enums.CarCareHubException;
 import com.example.carcarehub.enums.Status;
 import com.example.carcarehub.exception.AppException;
+import com.example.carcarehub.model.request.EmergencyReservationRequest;
 import com.example.carcarehub.model.request.ReservationRequest;
 import com.example.carcarehub.model.request.UpdateReservationRequest;
 import com.example.carcarehub.model.request.UserRegistrationRequest;
@@ -350,5 +351,68 @@ public class ReservationServiceImpl implements ReservationService{
             }
         }
         return reservationResponses;
+    }
+
+    @Override
+    public ReservationResponse createEmergencyReservation(EmergencyReservationRequest reservationRequest) throws Exception {
+
+        User user = userDao.findUserById(reservationRequest.getUserId());
+
+        if (user == null){
+            throw new AppException(CarCareHubException.USER_NOT_FOUND);
+        }
+
+        Merchant merchant = merchantDao.findMerchantById(reservationRequest.getMerchantId());
+
+        if (merchant == null){
+            throw new AppException(CarCareHubException.MERCHANT_NOT_FOUND);
+        }
+
+        int dailyCount = merchant.getDailyReservationLimit();
+        Random random = new Random();
+        String reference = String.format("%04d", random.nextInt(9999));
+        reference = "CARCAREHUB EMERGENCY"+reference;
+
+        Reservation reservation = new Reservation();
+
+        if (dailyCount == 0){
+            throw new AppException(CarCareHubException.RESERVATION_COUNT_EXCEEDED);
+        }
+
+        reservation.setUserId(user.getId());
+        reservation.setUserEmail(reservationRequest.getUserEmail());
+        reservation.setUserMobile(reservationRequest.getUserMobileNo());
+        reservation.setReference(reference);
+        reservation.setMerchantId(reservationRequest.getMerchantId());
+        reservation.setMerchantEmail(reservationRequest.getMerchantEmail());
+        reservation.setMerchantMobile(reservationRequest.getMerchantMobileNo());
+        reservation.setStationName(reservationRequest.getStationName());
+        reservation.setStatus(Status.PENDING_STATUS.getStatus());
+        reservation.setReservationDate(reservationRequest.getReservationDate());
+        reservation.setReservationTime(reservationRequest.getReservationTime());
+        reservation.setCreateDate(LocalDateTime.now());
+        reservation.setServiceType("EMERGENCY");
+        reservation.setVehicleType(reservationRequest.getVehicleType());
+
+        reservationDao.createReservation(reservation);
+
+        merchant.setDailyReservationLimit(merchant.getDailyReservationLimit()+1);
+
+        ReservationResponse response = new ReservationResponse();
+        response.setId(reservation.getId());
+        response.setMerchantId(reservation.getMerchantId());
+        response.setStationName(reservation.getStationName());
+        response.setMerchantMobile(reservation.getMerchantMobile());
+        response.setMerchantEmail(reservation.getMerchantEmail());
+        response.setUserId(reservation.getUserId());
+        response.setUserEmail(reservation.getUserEmail());
+        response.setUserMobile(reservation.getUserMobile());
+        response.setReference(reservation.getReference());
+        response.setStatus(reservation.getStatus());
+        response.setReservationTime(reservation.getReservationTime());
+        response.setReservationDate(reservation.getReservationDate());
+        response.setCreateDate(reservation.getCreateDate());
+
+        return  response;
     }
 }
